@@ -88,18 +88,17 @@ function startQuiz() {
     score = 0;
     userAnswers = [];
     // Reset and update score display in header
-    const scoreValueElement = document.getElementById('score-value');
-    if (scoreValueElement) {
-        scoreValueElement.textContent = '0'; // Explicitly set to 0
-        console.log('Score reset in startQuiz to:', scoreValueElement.textContent);
-    }
-    // Ensure quiz header is visible with initial state
     const quizHeader = document.querySelector('.quiz-header');
     if (quizHeader) {
         quizHeader.style.display = 'flex';
-        // Clear any previous content to avoid carryover
-        const headerScore = quizHeader.querySelector('#score-value');
-        if (headerScore) headerScore.textContent = '0';
+        const scoreValueElement = document.getElementById('score-value');
+        if (scoreValueElement) {
+            scoreValueElement.textContent = '0'; // Reset to 0
+            scoreValueElement.innerHTML = '0'; // Force reset content
+            console.log('Score reset in startQuiz to:', scoreValueElement.textContent);
+        } else {
+            console.error('Score-value element not found in quiz header!');
+        }
     }
     document.getElementById('start-screen').style.display = 'none';
     const quizElement = document.getElementById('quiz');
@@ -282,7 +281,12 @@ function showResult() {
     saveScore();
     document.getElementById('quiz').style.display = 'none';
     const resultDiv = document.getElementById('result');
-    resultDiv.style.display = 'block';
+    if (resultDiv) {
+        resultDiv.style.display = 'block';
+    } else {
+        console.error('Result div not found!');
+        return;
+    }
     // Hide the header during results
     const quizHeader = document.querySelector('.quiz-header');
     if (quizHeader) {
@@ -306,19 +310,23 @@ function showResult() {
     }
     // Detailed results
     const detailedResults = document.getElementById('detailed-results');
-    detailedResults.innerHTML = '<h3>Chi tiết câu trả lời:</h3>';
-    userAnswers.forEach((answer, index) => {
-        if (answer) {
-            const question = selectedQuestions[index];
-            const resultText = answer.correct
-                ? `Câu ${question.id}: Đúng (Bạn chọn ${answer.selected})`
-                : `Câu ${question.id}: Sai (Bạn chọn ${answer.selected || 'Không chọn'}, Đáp án đúng: ${question.correct})`;
-            const p = document.createElement('p');
-            p.innerText = resultText;
-            p.style.color = answer.correct ? 'green' : 'red';
-            detailedResults.appendChild(p);
-        }
-    });
+    if (detailedResults) {
+        detailedResults.innerHTML = '<h3>Chi tiết câu trả lời:</h3>';
+        userAnswers.forEach((answer, index) => {
+            if (answer) {
+                const question = selectedQuestions[index];
+                const resultText = answer.correct
+                    ? `Câu ${question.id}: Đúng (Bạn chọn ${answer.selected})`
+                    : `Câu ${question.id}: Sai (Bạn chọn ${answer.selected || 'Không chọn'}, Đáp án đúng: ${question.correct})`;
+                const p = document.createElement('p');
+                p.innerText = resultText;
+                p.style.color = answer.correct ? 'green' : 'red';
+                detailedResults.appendChild(p);
+            }
+        });
+    } else {
+        console.error('Detailed results element not found!');
+    }
 }
 
 function restartQuiz() {
@@ -333,7 +341,10 @@ function restartQuiz() {
     const scoreValueElement = document.getElementById('score-value');
     if (scoreValueElement) {
         scoreValueElement.textContent = '0'; // Reset to 0
+        scoreValueElement.innerHTML = '0'; // Force reset content
         console.log('Score reset in restartQuiz to:', scoreValueElement.textContent);
+    } else {
+        console.error('Score-value element not found in quiz header!');
     }
     // Hide quiz and results, show start screen
     const quizHeader = document.querySelector('.quiz-header');
