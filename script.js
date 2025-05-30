@@ -90,13 +90,16 @@ function startQuiz() {
     // Reset and update score display in header
     const scoreValueElement = document.getElementById('score-value');
     if (scoreValueElement) {
-        scoreValueElement.textContent = score; // Reset to 0
+        scoreValueElement.textContent = '0'; // Explicitly set to 0
         console.log('Score reset in startQuiz to:', scoreValueElement.textContent);
     }
     // Ensure quiz header is visible with initial state
     const quizHeader = document.querySelector('.quiz-header');
     if (quizHeader) {
         quizHeader.style.display = 'flex';
+        // Clear any previous content to avoid carryover
+        const headerScore = quizHeader.querySelector('#score-value');
+        if (headerScore) headerScore.textContent = '0';
     }
     document.getElementById('start-screen').style.display = 'none';
     const quizElement = document.getElementById('quiz');
@@ -288,7 +291,7 @@ function showResult() {
     // Display the score prominently in #score (result page)
     const scoreElement = document.getElementById('score');
     if (scoreElement) {
-        scoreElement.innerHTML = '';
+        scoreElement.innerHTML = ''; // Clear any previous content
         const scoreText = document.createElement('div');
         scoreText.className = 'score-text';
         scoreText.innerText = `Bạn trả lời đúng ${score}/${selectedQuestions.length} câu`;
@@ -297,8 +300,9 @@ function showResult() {
         percentageText.className = 'percentage-text';
         percentageText.innerText = `Tỷ lệ đúng: ${(score / selectedQuestions.length * 100).toFixed(2)}%`;
         scoreElement.appendChild(percentageText);
+        console.log('Result displayed: Bạn trả lời đúng', score, '/', selectedQuestions.length, 'câu');
     } else {
-        console.error('Score element not found in result page!');
+        console.error('Score element (#score) not found in result page!');
     }
     // Detailed results
     const detailedResults = document.getElementById('detailed-results');
