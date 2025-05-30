@@ -73,8 +73,6 @@ function updateNumQuestionsOptions() {
 function startQuiz() {
     const numQuestions = parseInt(document.getElementById('num-questions').value);
     console.log('Starting quiz with', numQuestions, 'questions');
-    console.log('Quiz element exists:', !!document.getElementById('quiz'));
-    console.log('Score value element exists:', !!document.getElementById('score-value'));
     if (questions.length === 0) {
         alert('Không có câu hỏi nào để bắt đầu! Vui lòng kiểm tra file questions.json.');
         document.getElementById('start-screen').style.display = 'block';
@@ -86,28 +84,21 @@ function startQuiz() {
         return;
     }
     selectedQuestions = shuffleArray([...questions]).slice(0, Math.min(numQuestions, questions.length));
-    console.log('Selected questions:', selectedQuestions);
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
     const scoreValueElement = document.getElementById('score-value');
     if (scoreValueElement) {
         scoreValueElement.textContent = score;
-    } else {
-        console.error('Score value element not found!');
     }
     document.getElementById('start-screen').style.display = 'none';
     const quizElement = document.getElementById('quiz');
     if (quizElement) {
-        quizElement.style.display = 'flex';
-    } else {
-        console.error('Quiz element not found!');
-        return;
+        quizElement.style.display = 'block';
     }
     // Initialize question grid
-    const gridContainer = document.getElementById('question-grid');
-    gridContainer.innerHTML = '<h4>Câu hỏi:</h4>';
-    gridContainer.innerHTML += '<div class="grid">';
+    const gridContainer = document.querySelector('#question-grid .grid');
+    gridContainer.innerHTML = '';
     const numCols = Math.ceil(Math.sqrt(selectedQuestions.length));
     gridContainer.style.setProperty('--grid-columns', numCols);
     selectedQuestions.forEach((_, index) => {
@@ -118,7 +109,6 @@ function startQuiz() {
         box.onclick = () => jumpToQuestion(index);
         gridContainer.appendChild(box);
     });
-    gridContainer.innerHTML += '</div>';
     loadQuestion();
 }
 
@@ -132,14 +122,13 @@ function jumpToQuestion(index) {
 function loadQuestion() {
     console.log('Loading question', currentQuestionIndex + 1, 'of', selectedQuestions.length);
     if (currentQuestionIndex >= selectedQuestions.length) {
-        console.log('Quiz completed, showing results');
         showResult();
         return;
     }
     const questionData = selectedQuestions[currentQuestionIndex];
     if (!questionData || !questionData.options || !questionData.correct) {
         console.error('Invalid question data:', questionData);
-        alert('Câu hỏi không hợp lệ! Vui lòng kiểm tra file questions.json.');
+        alert('Câu hỏi không hợp lệ! Vui lòng kiểm tra questions.json.');
         return;
     }
     document.getElementById('question').innerText = `Câu ${currentQuestionIndex + 1}/${selectedQuestions.length}: ${questionData.question}`;
@@ -154,7 +143,6 @@ function loadQuestion() {
         document.getElementById('time-left').textContent = timeLeft;
         startTimer();
         const optionKeys = shuffleArray(Object.keys(questionData.options).filter(key => questionData.options[key] !== ''));
-        console.log('Option keys:', optionKeys);
         optionKeys.forEach(key => {
             const button = document.createElement('button');
             button.className = 'option';
@@ -163,7 +151,6 @@ function loadQuestion() {
             optionsDiv.appendChild(button);
         });
     } else {
-        // Display previous answer
         const answer = userAnswers[currentQuestionIndex];
         const correct = questionData.correct;
         const optionKeys = Object.keys(questionData.options).filter(key => questionData.options[key] !== '');
@@ -232,8 +219,6 @@ function selectOption(button, option) {
         const scoreValueElement = document.getElementById('score-value');
         if (scoreValueElement) {
             scoreValueElement.textContent = score;
-        } else {
-            console.error('Score value element not found in selectOption!');
         }
         userAnswers[currentQuestionIndex] = { id: selectedQuestions[currentQuestionIndex].id, selected: option, correct: true };
     } else {
@@ -241,7 +226,6 @@ function selectOption(button, option) {
         feedback.style.color = 'red';
         userAnswers[currentQuestionIndex] = { id: selectedQuestions[currentQuestionIndex].id, selected: option, correct: false };
     }
-    // Update question grid
     const box = document.querySelector(`.question-box[data-index="${currentQuestionIndex}"]`);
     if (box) {
         box.classList.remove('unanswered');
@@ -280,8 +264,6 @@ function displayPastScores() {
                 pastScoresDiv.appendChild(p);
             });
         }
-    } else {
-        console.error('Past scores div not found!');
     }
 }
 
@@ -316,13 +298,9 @@ function restartQuiz() {
     selectedQuestions = [];
     userAnswers = [];
     clearInterval(timerId);
-    const quizElement = document.getElementById('quiz');
-    const resultElement = document.getElementById('result');
-    const startScreenElement = document.getElementById('start-screen');
-    if (quizElement) quizElement.style.display = 'none';
-    if (resultElement) resultElement.style.display = 'none';
-    if (startScreenElement) startScreenElement.style.display = 'block';
+    document.getElementById('quiz').style.display = 'none';
+    document.getElementById('result').style.display = 'none';
+    document.getElementById('start-screen').style.display = 'block';
     updateNumQuestionsOptions();
     displayPastScores();
-    console.log('Questions after restart:', questions);
 }
