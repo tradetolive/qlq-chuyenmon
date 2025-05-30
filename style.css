@@ -57,6 +57,7 @@ h1 {
     flex: 3;
     max-width: 1000px;
     padding: 20px;
+    margin-right: 220px; /* Reserve space for the fixed question grid */
 }
 
 #question {
@@ -135,7 +136,7 @@ h1 {
 }
 
 #question-grid {
-    width: 180px;
+    width: 160px; /* Reduced width to minimize overlap risk */
     position: fixed;
     right: 20px;
     top: 80px;
@@ -226,6 +227,7 @@ select {
     }
     .quiz-content {
         max-width: 100%;
+        margin-right: 0; /* Remove margin on smaller screens */
     }
     #question-grid {
         position: static;
