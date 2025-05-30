@@ -87,9 +87,15 @@ function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
+    // Reset score display
     const scoreValueElement = document.getElementById('score-value');
     if (scoreValueElement) {
         scoreValueElement.textContent = score;
+    }
+    // Ensure the header is visible for the new quiz
+    const quizHeader = document.querySelector('.quiz-header');
+    if (quizHeader) {
+        quizHeader.style.display = 'flex';
     }
     document.getElementById('start-screen').style.display = 'none';
     const quizElement = document.getElementById('quiz');
@@ -273,14 +279,18 @@ function showResult() {
     document.getElementById('quiz').style.display = 'none';
     const resultDiv = document.getElementById('result');
     resultDiv.style.display = 'block';
+    // Hide the header during results
+    const quizHeader = document.querySelector('.quiz-header');
+    if (quizHeader) {
+        quizHeader.style.display = 'none';
+    }
     // Display the score prominently
     const scoreElement = document.getElementById('score');
-    scoreElement.innerHTML = ''; // Clear existing content
+    scoreElement.innerHTML = '';
     const scoreText = document.createElement('div');
     scoreText.className = 'score-text';
     scoreText.innerText = `Bạn trả lời đúng ${score}/${selectedQuestions.length} câu`;
     scoreElement.appendChild(scoreText);
-    // Add percentage as a separate line
     const percentageText = document.createElement('div');
     percentageText.className = 'percentage-text';
     percentageText.innerText = `Tỷ lệ đúng: ${(score / selectedQuestions.length * 100).toFixed(2)}%`;
@@ -310,6 +320,12 @@ function restartQuiz() {
     selectedQuestions = [];
     userAnswers = [];
     clearInterval(timerId);
+    // Reset score display immediately
+    const scoreValueElement = document.getElementById('score-value');
+    if (scoreValueElement) {
+        scoreValueElement.textContent = '0';
+    }
+    // Hide the quiz and results, show start screen
     document.getElementById('quiz').style.display = 'none';
     document.getElementById('result').style.display = 'none';
     document.getElementById('start-screen').style.display = 'block';
