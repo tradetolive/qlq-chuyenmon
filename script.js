@@ -252,3 +252,8 @@ function restartQuiz() {
     displayPastScores();
     console.log('Questions after restart:', questions);
 }
+const clearScoresBtn = document.getElementById('clear-scores-btn');
+if (clearScoresBtn) clearScoresBtn.addEventListener('click', () => {
+    localStorage.removeItem('quizScores');
+    displayPastScores();
+});
