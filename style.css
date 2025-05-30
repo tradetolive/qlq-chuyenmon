@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+#start-screen, #quiz, #result {
+    margin-top: 20px;
+}
+
+#question {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+#timer, #score {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background: #eee;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.option:hover {
+    background: #ddd;
+}
+
+.option.selected {
+    background: #007bff;
+    color: white;
+}
+
+#feedback {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+#next-btn, #start-btn, #restart-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#next-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+#result {
+    text-align: center;
+}
+
+#detailed-results {
+    margin-top: 20px;
+    text-align: left;
+}
+
+select {
+    padding: 5px;
+    margin: 10px;
+    font-size: 1em;
+}
+
+@media (min-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+    .container {
+        padding: 30px;
+    }
+}
