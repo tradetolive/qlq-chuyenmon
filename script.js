@@ -224,29 +224,6 @@ function selectOption(button, option) {
     if (option === null) {
         feedback.innerText = `Hết thời gian! Đáp án đúng: ${correct}. ${selectedQuestions[currentQuestionIndex].options[correct]}`;
         feedback.style.color = 'red';
-        userAnswers[currentQuestionIndex] = { id: selectedQuestions[currentQuestionIndex].id, selected: null, clearInterval(timerId);
-        selectOption(null, null);
-    }
-}
-
-function selectOption(button, option) {
-    if (selectedOption) return;
-    selectedOption = option;
-    clearInterval(timerId);
-    const correct = selectedQuestions[currentQuestionIndex].correct;
-    const feedback = document.getElementById('feedback');
-    document.querySelectorAll('.option').forEach(btn => {
-        btn.disabled = true;
-        const btnKey = btn.innerText.split('.')[0];
-        if (btnKey === correct) {
-            btn.classList.add('correct');
-        } else if (btnKey === option && option !== correct) {
-            btn.classList.add('incorrect');
-        }
-    });
-    if (option === null) {
-        feedback.innerText = `Hết thời gian! Đáp án đúng: ${correct}. ${selectedQuestions[currentQuestionIndex].options[correct]}`;
-        feedback.style.color = 'red';
         userAnswers[currentQuestionIndex] = { id: selectedQuestions[currentQuestionIndex].id, selected: null, correct: false };
     } else if (option === correct) {
         feedback.innerText = 'Đúng!';
