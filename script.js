@@ -87,11 +87,11 @@ function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
-    // Reset and update score display
+    // Reset and update score display in header
     const scoreValueElement = document.getElementById('score-value');
     if (scoreValueElement) {
-        scoreValueElement.textContent = score; // Ensure score is 0
-        console.log('Score reset to:', score);
+        scoreValueElement.textContent = score; // Reset to 0
+        console.log('Score reset in startQuiz to:', scoreValueElement.textContent);
     }
     // Ensure quiz header is visible with initial state
     const quizHeader = document.querySelector('.quiz-header');
@@ -285,17 +285,21 @@ function showResult() {
     if (quizHeader) {
         quizHeader.style.display = 'none';
     }
-    // Display the score prominently
+    // Display the score prominently in #score (result page)
     const scoreElement = document.getElementById('score');
-    scoreElement.innerHTML = '';
-    const scoreText = document.createElement('div');
-    scoreText.className = 'score-text';
-    scoreText.innerText = `Bạn trả lời đúng ${score}/${selectedQuestions.length} câu`;
-    scoreElement.appendChild(scoreText);
-    const percentageText = document.createElement('div');
-    percentageText.className = 'percentage-text';
-    percentageText.innerText = `Tỷ lệ đúng: ${(score / selectedQuestions.length * 100).toFixed(2)}%`;
-    scoreElement.appendChild(percentageText);
+    if (scoreElement) {
+        scoreElement.innerHTML = '';
+        const scoreText = document.createElement('div');
+        scoreText.className = 'score-text';
+        scoreText.innerText = `Bạn trả lời đúng ${score}/${selectedQuestions.length} câu`;
+        scoreElement.appendChild(scoreText);
+        const percentageText = document.createElement('div');
+        percentageText.className = 'percentage-text';
+        percentageText.innerText = `Tỷ lệ đúng: ${(score / selectedQuestions.length * 100).toFixed(2)}%`;
+        scoreElement.appendChild(percentageText);
+    } else {
+        console.error('Score element not found in result page!');
+    }
     // Detailed results
     const detailedResults = document.getElementById('detailed-results');
     detailedResults.innerHTML = '<h3>Chi tiết câu trả lời:</h3>';
