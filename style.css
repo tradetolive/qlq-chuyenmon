@@ -143,3 +143,16 @@ select {
         padding: 30px;
     }
 }
+#clear-scores-btn {
+    display: inline-block;
+    width: auto;
+    padding: 5px;
+    margin-bottom:10px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+#clear-score-btn
