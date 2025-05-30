@@ -57,7 +57,7 @@ h1 {
     flex: 3;
     max-width: 1000px;
     padding: 20px;
-    margin-right: 220px; /* Reserve space for the fixed question grid */
+    margin-right: 220px;
 }
 
 #question {
@@ -136,7 +136,7 @@ h1 {
 }
 
 #question-grid {
-    width: 160px; /* Reduced width to minimize overlap risk */
+    width: 160px;
     position: fixed;
     right: 20px;
     top: 80px;
@@ -186,6 +186,19 @@ h1 {
     padding: 20px;
 }
 
+.score-text {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #28a745;
+    margin-bottom: 10px;
+}
+
+.percentage-text {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 20px;
+}
+
 #detailed-results {
     margin-top: 20px;
     text-align: left;
@@ -227,7 +240,7 @@ select {
     }
     .quiz-content {
         max-width: 100%;
-        margin-right: 0; /* Remove margin on smaller screens */
+        margin-right: 0;
     }
     #question-grid {
         position: static;
