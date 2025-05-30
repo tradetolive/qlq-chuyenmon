@@ -3,48 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Practice QLQ exam</title>
+    <title>Quiz Application</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Practice QLQ exam</h1>
-        <div id="start-screen">
-            <label for="num-questions">Số lượng câu hỏi:</label>
-            <select id="num-questions"></select>
-            <button id="start-btn">Bắt đầu</button>
-            <button id="clear-scores-btn">Xóa lịch sử điểm</button>
-            <div id="past-scores"></div>
+    <div id="start-screen">
+        <h1>Chào mừng đến với Quiz</h1>
+        <label for="num-questions">Số lượng câu hỏi: </label>
+        <select id="num-questions"></select>
+        <button id="start-btn">Bắt Đầu</button>
+    </div>
+    <div id="quiz" style="display: none;">
+        <div class="quiz-header">
+            <div>Thời gian còn lại: <span id="time-left">600</span>s</div>
+            <div id="score">Điểm: <span id="score-value">0</span></div>
+            <div id="progress-container"><div id="progress"></div></div>
         </div>
-        <div id="quiz" style="display: none;">
-            <div class="quiz-header">
-                <div id="timer">Thời gian: <span id="time-left">600</span>s</div>
-                <div id="score">Điểm: <span id="score-value">0</span></div>
-            </div>
-            <div class="quiz-main">
-                <div class="quiz-content">
-                    <div id="progress-bar">
-                        <div id="progress"></div>
-                    </div>
-                    <div id="question"></div>
-                    <div id="options"></div>
-                    <div id="feedback"></div>
-                    <button id="next-btn" disabled>Kế Tiếp</button>
-                </div>
-                <div id="question-grid">
-                    <h4>Câu hỏi:</h4>
-                    <div class="grid"></div>
-                </div>
-            </div>
-        </div>
-        <div id="result" style="display: none;">
-            <h2>Kết Quả</h2>
-            <p id="score"></p>
-                            <div id="score">Điểm: <span id="score-value">0</span></div>
-            <div id="detailed-results"></div>
-            <button id="restart-btn">Làm Lại</button>
+        <div id="question"></div>
+        <div id="options"></div>
+        <div id="feedback"></div>
+        <button id="next-btn" disabled>Tiếp Theo</button>
+        <div id="question-grid">
+            <div class="grid"></div>
         </div>
     </div>
+    <div id="result" style="display: none;">
+        <h2>Kết Quả</h2>
+        <div id="result-score"></div>
+        <div id="detailed-results"></div>
+        <button id="restart-btn">Làm Lại</button>
+    </div>
+    <div id="past-scores"></div>
+    <button id="clear-scores-btn">Xóa Lịch Sử Điểm</button>
     <script src="script.js"></script>
 </body>
 </html>
