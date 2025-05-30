@@ -135,6 +135,22 @@ select {
     font-size: 1em;
 }
 
+#clear-scores-btn {
+    display: inline-block;
+    width: auto;
+    padding: 10px 20px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+#clear-scores-btn:hover {
+    background: #c82333;
+}
+
 @media (min-width: 768px) {
     h1 {
         font-size: 2em;
