@@ -40,6 +40,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
             const restartBtn = document.getElementById('restart-btn');
             if (restartBtn) restartBtn.addEventListener('click', restartQuiz);
+            const clearScoresBtn = document.getElementById('clear-scores-btn');
+            if (clearScoresBtn) {
+                clearScoresBtn.addEventListener('click', () => {
+                    console.log('Clearing score history...');
+                    localStorage.removeItem('quizScores');
+                    displayPastScores();
+                });
+            } else {
+                console.error('Clear scores button not found!');
+            }
         })
         .catch(error => {
             console.error('Lỗi tải câu hỏi:', error);
