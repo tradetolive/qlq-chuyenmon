@@ -33,8 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (startBtn) {
                 startBtn.replaceWith(startBtn.cloneNode(true));
                 document.getElementById('start-btn').addEventListener('click', startQuiz);
-            } else {
-                console.error('Start button not found!');
             }
             const nextBtn = document.getElementById('next-btn');
             if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
@@ -47,8 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     localStorage.removeItem('quizScores');
                     displayPastScores();
                 });
-            } else {
-                console.error('Clear scores button not found!');
             }
         })
         .catch(error => {
@@ -87,25 +83,18 @@ function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
-    // Reset and update score display in header
     const quizHeader = document.querySelector('.quiz-header');
     if (quizHeader) {
         quizHeader.style.display = 'flex';
         const scoreValueElement = document.getElementById('score-value');
         if (scoreValueElement) {
-            scoreValueElement.textContent = '0'; // Reset to 0
-            scoreValueElement.innerHTML = '0'; // Force reset content
+            scoreValueElement.textContent = `0/${selectedQuestions.length}`;
             console.log('Score reset in startQuiz to:', scoreValueElement.textContent);
-        } else {
-            console.error('Score-value element not found in quiz header!');
         }
     }
     document.getElementById('start-screen').style.display = 'none';
     const quizElement = document.getElementById('quiz');
-    if (quizElement) {
-        quizElement.style.display = 'block';
-    }
-    // Initialize question grid
+    if (quizElement) quizElement.style.display = 'block';
     const gridContainer = document.querySelector('#question-grid .grid');
     gridContainer.innerHTML = '';
     const numCols = Math.ceil(Math.sqrt(selectedQuestions.length));
@@ -168,11 +157,8 @@ function loadQuestion() {
             button.className = 'option';
             button.innerText = `${key}. ${questionData.options[key]}`;
             button.disabled = true;
-            if (key === correct) {
-                button.classList.add('correct');
-            } else if (key === answer.selected && answer.selected !== correct) {
-                button.classList.add('incorrect');
-            }
+            if (key === correct) button.classList.add('correct');
+            else if (key === answer.selected && answer.selected !== correct) button.classList.add('incorrect');
             optionsDiv.appendChild(button);
         });
         const feedback = document.getElementById('feedback');
@@ -211,11 +197,8 @@ function selectOption(button, option) {
     document.querySelectorAll('.option').forEach(btn => {
         btn.disabled = true;
         const btnKey = btn.innerText.split('.')[0];
-        if (btnKey === correct) {
-            btn.classList.add('correct');
-        } else if (btnKey === option && option !== correct) {
-            btn.classList.add('incorrect');
-        }
+        if (btnKey === correct) btn.classList.add('correct');
+        else if (btnKey === option && option !== correct) btn.classList.add('incorrect');
     });
     if (option === null) {
         feedback.innerText = `Hết thời gian! Đáp án đúng: ${correct}. ${selectedQuestions[currentQuestionIndex].options[correct]}`;
@@ -227,7 +210,7 @@ function selectOption(button, option) {
         score++;
         const scoreValueElement = document.getElementById('score-value');
         if (scoreValueElement) {
-            scoreValueElement.textContent = score;
+            scoreValueElement.textContent = `${score}/${selectedQuestions.length}`;
         }
         userAnswers[currentQuestionIndex] = { id: selectedQuestions[currentQuestionIndex].id, selected: option, correct: true };
     } else {
@@ -281,34 +264,22 @@ function showResult() {
     saveScore();
     document.getElementById('quiz').style.display = 'none';
     const resultDiv = document.getElementById('result');
-    if (resultDiv) {
-        resultDiv.style.display = 'block';
-    } else {
-        console.error('Result div not found!');
-        return;
-    }
-    // Hide the header during results
+    if (resultDiv) resultDiv.style.display = 'block';
     const quizHeader = document.querySelector('.quiz-header');
-    if (quizHeader) {
-        quizHeader.style.display = 'none';
-    }
-    // Display the score prominently in #score (result page)
-    const scoreElement = document.getElementById('score');
-    if (scoreElement) {
-        scoreElement.innerHTML = ''; // Clear any previous content
+    if (quizHeader) quizHeader.style.display = 'none';
+    const resultScoreElement = document.getElementById('result-score');
+    if (resultScoreElement) {
+        resultScoreElement.innerHTML = '';
         const scoreText = document.createElement('div');
         scoreText.className = 'score-text';
         scoreText.innerText = `Bạn trả lời đúng ${score}/${selectedQuestions.length} câu`;
-        scoreElement.appendChild(scoreText);
+        resultScoreElement.appendChild(scoreText);
         const percentageText = document.createElement('div');
         percentageText.className = 'percentage-text';
         percentageText.innerText = `Tỷ lệ đúng: ${(score / selectedQuestions.length * 100).toFixed(2)}%`;
-        scoreElement.appendChild(percentageText);
+        resultScoreElement.appendChild(percentageText);
         console.log('Result displayed: Bạn trả lời đúng', score, '/', selectedQuestions.length, 'câu');
-    } else {
-        console.error('Score element (#score) not found in result page!');
     }
-    // Detailed results
     const detailedResults = document.getElementById('detailed-results');
     if (detailedResults) {
         detailedResults.innerHTML = '<h3>Chi tiết câu trả lời:</h3>';
@@ -324,8 +295,6 @@ function showResult() {
                 detailedResults.appendChild(p);
             }
         });
-    } else {
-        console.error('Detailed results element not found!');
     }
 }
 
@@ -337,20 +306,13 @@ function restartQuiz() {
     selectedQuestions = [];
     userAnswers = [];
     clearInterval(timerId);
-    // Reset score display immediately
     const scoreValueElement = document.getElementById('score-value');
     if (scoreValueElement) {
-        scoreValueElement.textContent = '0'; // Reset to 0
-        scoreValueElement.innerHTML = '0'; // Force reset content
+        scoreValueElement.textContent = `0/0`; // Reset to 0/0 until new quiz starts
         console.log('Score reset in restartQuiz to:', scoreValueElement.textContent);
-    } else {
-        console.error('Score-value element not found in quiz header!');
     }
-    // Hide quiz and results, show start screen
     const quizHeader = document.querySelector('.quiz-header');
-    if (quizHeader) {
-        quizHeader.style.display = 'none'; // Hide header during transition
-    }
+    if (quizHeader) quizHeader.style.display = 'none';
     document.getElementById('quiz').style.display = 'none';
     document.getElementById('result').style.display = 'none';
     document.getElementById('start-screen').style.display = 'block';
