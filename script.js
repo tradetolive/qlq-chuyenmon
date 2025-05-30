@@ -3,7 +3,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let selectedOption = null;
 let selectedQuestions = [];
-let timeLeft = 30;
+let timeLeft = 600;
 let timerId;
 let userAnswers = []; // Lưu câu trả lời của người dùng để hiển thị chi tiết
 
