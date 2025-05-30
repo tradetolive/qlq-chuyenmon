@@ -87,12 +87,13 @@ function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
-    // Reset score display
+    // Reset and update score display
     const scoreValueElement = document.getElementById('score-value');
     if (scoreValueElement) {
-        scoreValueElement.textContent = score;
+        scoreValueElement.textContent = score; // Ensure score is 0
+        console.log('Score reset to:', score);
     }
-    // Ensure the header is visible for the new quiz
+    // Ensure quiz header is visible with initial state
     const quizHeader = document.querySelector('.quiz-header');
     if (quizHeader) {
         quizHeader.style.display = 'flex';
@@ -323,9 +324,14 @@ function restartQuiz() {
     // Reset score display immediately
     const scoreValueElement = document.getElementById('score-value');
     if (scoreValueElement) {
-        scoreValueElement.textContent = '0';
+        scoreValueElement.textContent = '0'; // Reset to 0
+        console.log('Score reset in restartQuiz to:', scoreValueElement.textContent);
     }
-    // Hide the quiz and results, show start screen
+    // Hide quiz and results, show start screen
+    const quizHeader = document.querySelector('.quiz-header');
+    if (quizHeader) {
+        quizHeader.style.display = 'none'; // Hide header during transition
+    }
     document.getElementById('quiz').style.display = 'none';
     document.getElementById('result').style.display = 'none';
     document.getElementById('start-screen').style.display = 'block';
