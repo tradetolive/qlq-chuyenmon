@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "question": "Tổng giám đốc công ty chứng khoán phải đáp ứng các tiêu chuẩn sau đây:",
+        "options": {
+            "A": "Có chứng chỉ hành nghề môi giới chứng khoán",
+            "B": "Có chứng chỉ hành nghề môi giới chứng khoán hoặc chứng chỉ hành nghề phân tích tài chính",
+            "C": "Có chứng chỉ hành nghề môi giới chứng khoán hoặc chứng chỉ hành nghề quản lý quỹ",
+            "D": "Có chứng chỉ hành nghề phân tích tài chính hoặc chứng chỉ hành nghề quản lý quỹ",
+            "E": ""
+        },
+        "correct": "D"
+    },
+    {
+        "id": 2,
+        "question": "Công ty chứng khoán nước ngoài và công ty quản lý quỹ nước ngoài được lập bao nhiêu chi nhánh tại Việt Nam?",
+        "options": {
+            "A": "01",
+            "B": "02",
+            "C": "03",
+            "D": "04",
+            "E": ""
+        },
+        "correct": "A"
+    }
+]
