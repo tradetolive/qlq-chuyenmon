@@ -63,6 +63,8 @@ function updateNumQuestionsOptions() {
 function startQuiz() {
     const numQuestions = parseInt(document.getElementById('num-questions').value);
     console.log('Starting quiz with', numQuestions, 'questions');
+    console.log('Quiz element exists:', !!document.getElementById('quiz'));
+    console.log('Score value element exists:', !!document.getElementById('score-value'));
     if (questions.length === 0) {
         alert('Không có câu hỏi nào để bắt đầu! Vui lòng kiểm tra file questions.json.');
         document.getElementById('start-screen').style.display = 'block';
@@ -164,7 +166,12 @@ function selectOption(button, option) {
         feedback.innerText = 'Đúng!';
         feedback.style.color = 'green';
         score++;
-        document.getElementById('score-value').textContent = score;
+        const scoreValueElement = document.getElementById('score-value');
+        if (scoreValueElement) {
+            scoreValueElement.textContent = score;
+        } else {
+            console.error('Score value element not found in selectOption!');
+        }
         userAnswers.push({ id: selectedQuestions[currentQuestionIndex].id, selected: option, correct: true });
     } else {
         feedback.innerText = `Sai! Đáp án đúng: ${correct}. ${selectedQuestions[currentQuestionIndex].options[correct]}`;
