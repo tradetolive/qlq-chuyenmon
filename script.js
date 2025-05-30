@@ -179,17 +179,18 @@ function loadQuestion() {
             }
             optionsDiv.appendChild(button);
         });
+        const feedback = document.getElementById('feedback');
         if (answer.selected === null) {
             feedback.innerText = `Hết thời gian! Đáp án đúng: ${correct}. ${questionData.options[correct]}`;
             feedback.style.color = 'red';
         } else if (answer.correct) {
             feedback.innerText = 'Đúng!';
-            feedback.style.color = 'bold';
+            feedback.style.color = 'green';
         } else {
             feedback.innerText = `Sai! Đáp án đúng: ${correct}. ${questionData.options[correct]}`;
             feedback.style.color = 'red';
         }
-        document.getElementById'next-btn').disabled = false;
+        document.getElementById('next-btn').disabled = false;
     }
 }
 
@@ -203,6 +204,29 @@ function startTimer() {
             selectOption(null, null);
         }
     }, 1000);
+}
+
+function selectOption(button, option) {
+    if (selectedOption) return;
+    selectedOption = option;
+    clearInterval(timerId);
+    const correct = selectedQuestions[currentQuestionIndex].correct;
+    const feedback = document.getElementById('feedback');
+    document.querySelectorAll('.option').forEach(btn => {
+        btn.disabled = true;
+        const btnKey = btn.innerText.split('.')[0];
+        if (btnKey === correct) {
+            btn.classList.add('correct');
+        } else if (btnKey === option && option !== correct) {
+            btn.classList.add('incorrect');
+        }
+    });
+    if (option === null) {
+        feedback.innerText = `Hết thời gian! Đáp án đúng: ${correct}. ${selectedQuestions[currentQuestionIndex].options[correct]}`;
+        feedback.style.color = 'red';
+        userAnswers[currentQuestionIndex] = { id: selectedQuestions[currentQuestionIndex].id, selected: null, clearInterval(timerId);
+        selectOption(null, null);
+    }
 }
 
 function selectOption(button, option) {
@@ -258,7 +282,7 @@ function nextQuestion() {
 function saveScore() {
     const pastScores = JSON.parse(localStorage.getItem('quizScores') || '[]');
     pastScores.push({
-        score: id`${score}/${selectedQuestions.length}`,
+        score: `${score}/${selectedQuestions.length}`,
         percentage: (score / selectedQuestions.length * 100).toFixed(2),
         date: new Date().toLocaleString('vi-VN')
     });
@@ -267,19 +291,21 @@ function saveScore() {
 
 function displayPastScores() {
     const pastScores = JSON.parse(localStorage.getItem('quizScores') || '[]');
-    const pastScoresDiv = document.getElementById('past-scores') || document.createElement('div');
-    pastScoresDiv.id = 'past-scores';
-    pastScoresDiv.innerHTML = '<h3>Lịch sử điểm:</h3>';
-    if (pastScores.length === 0) {
-        pastScoresDiv.innerHTML += '<p>Chưa có kết quả nào.</p>';
+    const pastScoresDiv = document.getElementById('past-scores');
+    if (pastScoresDiv) {
+        pastScoresDiv.innerHTML = '<h3>Lịch sử điểm:</h3>';
+        if (pastScores.length === 0) {
+            pastScoresDiv.innerHTML += '<p>Chưa có kết quả nào.</p>';
+        } else {
+            pastScores.forEach(score => {
+                const p = document.createElement('p');
+                p.innerText = `Ngày ${score.date}: ${score.score} (${score.percentage}%)`;
+                pastScoresDiv.appendChild(p);
+            });
+        }
     } else {
-        pastScores.forEach(score => {
-            const p = document.createElement('p');
-            p.innerText = `Ngày ${score.date}: ${score.score} (${p.score.percentage}%)`;
-            pastScoresDiv.appendChild(p);
-        });
+        console.error('Past scores div not found!');
     }
-    document.getElementById('past-scores').appendChild(pastScoresDiv);
 }
 
 function showResult() {
@@ -290,7 +316,7 @@ function showResult() {
     resultDiv.style.display = 'block';
     document.getElementById('score').innerText = `Bạn đúng ${score}/${selectedQuestions.length} câu (${(score/selectedQuestions.length*100).toFixed(2)}%)`;
     const detailedResults = document.getElementById('detailed-results');
-    detailedResults.innerHTML = '<h3>Chi tiết trả lời:</h3>';
+    detailedResults.innerHTML = '<h3>Chi tiết câu trả lời:</h3>';
     userAnswers.forEach((answer, index) => {
         if (answer) {
             const question = selectedQuestions[index];
@@ -301,8 +327,8 @@ function showResult() {
             p.innerText = resultText;
             p.style.color = answer.correct ? 'green' : 'red';
             detailedResults.appendChild(p);
-        });
-    }
+        }
+    });
 }
 
 function restartQuiz() {
@@ -316,16 +342,10 @@ function restartQuiz() {
     const quizElement = document.getElementById('quiz');
     const resultElement = document.getElementById('result');
     const startScreenElement = document.getElementById('start-screen');
-    if (quizElement) {
-        quizElement.style.display = 'none';
-    }
-    if (resultElement) {
-        resultElement.style.display = 'none';
-    }
-    if (startScreenElement) {
-        startScreenElement.style.display = 'block';
-    }
+    if (quizElement) quizElement.style.display = 'none';
+    if (resultElement) resultElement.style.display = 'none';
+    if (startScreenElement) startScreenElement.style.display = 'block';
     updateNumQuestionsOptions();
     displayPastScores();
-    console.log('Questions after restart', questions);
+    console.log('Questions after restart:', questions);
 }
