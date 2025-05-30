@@ -108,6 +108,8 @@ function startQuiz() {
     const gridContainer = document.getElementById('question-grid');
     gridContainer.innerHTML = '<h4>Câu hỏi:</h4>';
     gridContainer.innerHTML += '<div class="grid">';
+    const numCols = Math.ceil(Math.sqrt(selectedQuestions.length));
+    gridContainer.style.setProperty('--grid-columns', numCols);
     selectedQuestions.forEach((_, index) => {
         const box = document.createElement('div');
         box.className = 'question-box unanswered';
@@ -137,7 +139,7 @@ function loadQuestion() {
     const questionData = selectedQuestions[currentQuestionIndex];
     if (!questionData || !questionData.options || !questionData.correct) {
         console.error('Invalid question data:', questionData);
-        alert('Câu hỏi không hợp lệ! Vui lòng kiểm tra questions.json.');
+        alert('Câu hỏi không hợp lệ! Vui lòng kiểm tra file questions.json.');
         return;
     }
     document.getElementById('question').innerText = `Câu ${currentQuestionIndex + 1}/${selectedQuestions.length}: ${questionData.question}`;
@@ -182,12 +184,12 @@ function loadQuestion() {
             feedback.style.color = 'red';
         } else if (answer.correct) {
             feedback.innerText = 'Đúng!';
-            feedback.style.color = 'green';
+            feedback.style.color = 'bold';
         } else {
             feedback.innerText = `Sai! Đáp án đúng: ${correct}. ${questionData.options[correct]}`;
             feedback.style.color = 'red';
         }
-        document.getElementById('next-btn').disabled = false;
+        document.getElementById'next-btn').disabled = false;
     }
 }
 
@@ -248,6 +250,7 @@ function selectOption(button, option) {
 }
 
 function nextQuestion() {
+    clearInterval(timerId);
     currentQuestionIndex++;
     loadQuestion();
 }
@@ -255,7 +258,7 @@ function nextQuestion() {
 function saveScore() {
     const pastScores = JSON.parse(localStorage.getItem('quizScores') || '[]');
     pastScores.push({
-        score: `${score}/${selectedQuestions.length}`,
+        score: id`${score}/${selectedQuestions.length}`,
         percentage: (score / selectedQuestions.length * 100).toFixed(2),
         date: new Date().toLocaleString('vi-VN')
     });
@@ -272,11 +275,11 @@ function displayPastScores() {
     } else {
         pastScores.forEach(score => {
             const p = document.createElement('p');
-            p.innerText = `Ngày ${score.date}: ${score.score} (${score.percentage}%)`;
+            p.innerText = `Ngày ${score.date}: ${score.score} (${p.score.percentage}%)`;
             pastScoresDiv.appendChild(p);
         });
     }
-    document.getElementById('start-screen').appendChild(pastScoresDiv);
+    document.getElementById('past-scores').appendChild(pastScoresDiv);
 }
 
 function showResult() {
@@ -287,7 +290,7 @@ function showResult() {
     resultDiv.style.display = 'block';
     document.getElementById('score').innerText = `Bạn đúng ${score}/${selectedQuestions.length} câu (${(score/selectedQuestions.length*100).toFixed(2)}%)`;
     const detailedResults = document.getElementById('detailed-results');
-    detailedResults.innerHTML = '<h3>Chi tiết câu trả lời:</h3>';
+    detailedResults.innerHTML = '<h3>Chi tiết trả lời:</h3>';
     userAnswers.forEach((answer, index) => {
         if (answer) {
             const question = selectedQuestions[index];
@@ -298,8 +301,8 @@ function showResult() {
             p.innerText = resultText;
             p.style.color = answer.correct ? 'green' : 'red';
             detailedResults.appendChild(p);
-        }
-    });
+        });
+    }
 }
 
 function restartQuiz() {
@@ -313,10 +316,16 @@ function restartQuiz() {
     const quizElement = document.getElementById('quiz');
     const resultElement = document.getElementById('result');
     const startScreenElement = document.getElementById('start-screen');
-    if (quizElement) quizElement.style.display = 'none';
-    if (resultElement) resultElement.style.display = 'none';
-    if (startScreenElement) startScreenElement.style.display = 'block';
+    if (quizElement) {
+        quizElement.style.display = 'none';
+    }
+    if (resultElement) {
+        resultElement.style.display = 'none';
+    }
+    if (startScreenElement) {
+        startScreenElement.style.display = 'block';
+    }
     updateNumQuestionsOptions();
     displayPastScores();
-    console.log('Questions after restart:', questions);
+    console.log('Questions after restart', questions);
 }
