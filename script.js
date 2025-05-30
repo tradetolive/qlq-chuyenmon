@@ -64,7 +64,7 @@ function loadQuestion() {
     document.getElementById('feedback').innerText = '';
     document.getElementById('next-btn').disabled = true;
     selectedOption = null;
-    timeLeft = 30;
+    timeLeft = 600;
     document.getElementById('time-left').textContent = timeLeft;
 
     startTimer();
