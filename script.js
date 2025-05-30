@@ -16,9 +16,16 @@ function shuffleArray(array) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Loading questions.json...');
     fetch('questions.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Không thể tải questions.json: ${response.status} ${response.statusText}`);
+            }
+            return response.json();
+        })
         .then(data => {
+            console.log('Questions loaded:', data);
             questions = data;
             updateNumQuestionsOptions();
             displayPastScores();
@@ -26,7 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('next-btn').addEventListener('click', nextQuestion);
             document.getElementById('restart-btn').addEventListener('click', restartQuiz);
         })
-        .catch(error => console.error('Lỗi tải câu hỏi:', error));
+        .catch(error => {
+            console.error('Lỗi tải câu hỏi:', error);
+            alert('Không thể tải câu hỏi. Vui lòng kiểm tra file questions.json hoặc kết nối mạng.');
+        });
 });
 
 function updateNumQuestionsOptions() {
@@ -42,13 +52,19 @@ function updateNumQuestionsOptions() {
 
 function startQuiz() {
     const numQuestions = parseInt(document.getElementById('num-questions').value);
+    console.log('Starting quiz with', numQuestions, 'questions');
     if (questions.length === 0) {
-        alert('Không có câu hỏi nào để bắt đầu!');
+        alert('Không có câu hỏi nào để bắt đầu! Vui lòng kiểm tra file questions.json.');
         document.getElementById('start-screen').style.display = 'block';
         document.getElementById('quiz').style.display = 'none';
         return;
     }
+    if (numQuestions < 1 || isNaN(numQuestions)) {
+        alert('Vui lòng chọn số lượng câu hỏi hợp lệ!');
+        return;
+    }
     selectedQuestions = shuffleArray([...questions]).slice(0, Math.min(numQuestions, questions.length));
+    console.log('Selected questions:', selectedQuestions);
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
@@ -59,11 +75,18 @@ function startQuiz() {
 }
 
 function loadQuestion() {
+    console.log('Loading question', currentQuestionIndex + 1, 'of', selectedQuestions.length);
     if (currentQuestionIndex >= selectedQuestions.length) {
+        console.log('Quiz completed, showing results');
         showResult();
         return;
     }
     const questionData = selectedQuestions[currentQuestionIndex];
+    if (!questionData || !questionData.options || !questionData.correct) {
+        console.error('Invalid question data:', questionData);
+        alert('Câu hỏi không hợp lệ! Vui lòng kiểm tra questions.json.');
+        return;
+    }
     document.getElementById('question').innerText = `Câu ${currentQuestionIndex + 1}/${selectedQuestions.length}: ${questionData.question}`;
     document.getElementById('progress').style.width = `${((currentQuestionIndex + 1) / selectedQuestions.length * 100)}%`;
     const optionsDiv = document.getElementById('options');
@@ -75,6 +98,7 @@ function loadQuestion() {
     document.getElementById('time-left').textContent = timeLeft;
     startTimer();
     const optionKeys = shuffleArray(Object.keys(questionData.options).filter(key => questionData.options[key] !== ''));
+    console.log('Option keys:', optionKeys);
     optionKeys.forEach(key => {
         const button = document.createElement('button');
         button.className = 'option';
