@@ -99,12 +99,32 @@ function startQuiz() {
     document.getElementById('start-screen').style.display = 'none';
     const quizElement = document.getElementById('quiz');
     if (quizElement) {
-        quizElement.style.display = 'block';
+        quizElement.style.display = 'flex';
     } else {
         console.error('Quiz element not found!');
         return;
     }
+    // Initialize question grid
+    const gridContainer = document.getElementById('question-grid');
+    gridContainer.innerHTML = '<h4>Câu hỏi:</h4>';
+    gridContainer.innerHTML += '<div class="grid">';
+    selectedQuestions.forEach((_, index) => {
+        const box = document.createElement('div');
+        box.className = 'question-box unanswered';
+        box.innerText = index + 1;
+        box.dataset.index = index;
+        box.onclick = () => jumpToQuestion(index);
+        gridContainer.appendChild(box);
+    });
+    gridContainer.innerHTML += '</div>';
     loadQuestion();
+}
+
+function jumpToQuestion(index) {
+    if (index >= 0 && index < selectedQuestions.length && index !== currentQuestionIndex) {
+        currentQuestionIndex = index;
+        loadQuestion();
+    }
 }
 
 function loadQuestion() {
@@ -127,18 +147,48 @@ function loadQuestion() {
     document.getElementById('feedback').innerText = '';
     document.getElementById('next-btn').disabled = true;
     selectedOption = null;
-    timeLeft = 600;
-    document.getElementById('time-left').textContent = timeLeft;
-    startTimer();
-    const optionKeys = shuffleArray(Object.keys(questionData.options).filter(key => questionData.options[key] !== ''));
-    console.log('Option keys:', optionKeys);
-    optionKeys.forEach(key => {
-        const button = document.createElement('button');
-        button.className = 'option';
-        button.innerText = `${key}. ${questionData.options[key]}`;
-        button.onclick = () => selectOption(button, key);
-        optionsDiv.appendChild(button);
-    });
+    if (!userAnswers[currentQuestionIndex]) {
+        timeLeft = 600;
+        document.getElementById('time-left').textContent = timeLeft;
+        startTimer();
+        const optionKeys = shuffleArray(Object.keys(questionData.options).filter(key => questionData.options[key] !== ''));
+        console.log('Option keys:', optionKeys);
+        optionKeys.forEach(key => {
+            const button = document.createElement('button');
+            button.className = 'option';
+            button.innerText = `${key}. ${questionData.options[key]}`;
+            button.onclick = () => selectOption(button, key);
+            optionsDiv.appendChild(button);
+        });
+    } else {
+        // Display previous answer
+        const answer = userAnswers[currentQuestionIndex];
+        const correct = questionData.correct;
+        const optionKeys = Object.keys(questionData.options).filter(key => questionData.options[key] !== '');
+        optionKeys.forEach(key => {
+            const button = document.createElement('button');
+            button.className = 'option';
+            button.innerText = `${key}. ${questionData.options[key]}`;
+            button.disabled = true;
+            if (key === correct) {
+                button.classList.add('correct');
+            } else if (key === answer.selected && answer.selected !== correct) {
+                button.classList.add('incorrect');
+            }
+            optionsDiv.appendChild(button);
+        });
+        if (answer.selected === null) {
+            feedback.innerText = `Hết thời gian! Đáp án đúng: ${correct}. ${questionData.options[correct]}`;
+            feedback.style.color = 'red';
+        } else if (answer.correct) {
+            feedback.innerText = 'Đúng!';
+            feedback.style.color = 'green';
+        } else {
+            feedback.innerText = `Sai! Đáp án đúng: ${correct}. ${questionData.options[correct]}`;
+            feedback.style.color = 'red';
+        }
+        document.getElementById('next-btn').disabled = false;
+    }
 }
 
 function startTimer() {
@@ -171,7 +221,7 @@ function selectOption(button, option) {
     if (option === null) {
         feedback.innerText = `Hết thời gian! Đáp án đúng: ${correct}. ${selectedQuestions[currentQuestionIndex].options[correct]}`;
         feedback.style.color = 'red';
-        userAnswers.push({ id: selectedQuestions[currentQuestionIndex].id, selected: null, correct: false });
+        userAnswers[currentQuestionIndex] = { id: selectedQuestions[currentQuestionIndex].id, selected: null, correct: false };
     } else if (option === correct) {
         feedback.innerText = 'Đúng!';
         feedback.style.color = 'green';
@@ -182,11 +232,17 @@ function selectOption(button, option) {
         } else {
             console.error('Score value element not found in selectOption!');
         }
-        userAnswers.push({ id: selectedQuestions[currentQuestionIndex].id, selected: option, correct: true });
+        userAnswers[currentQuestionIndex] = { id: selectedQuestions[currentQuestionIndex].id, selected: option, correct: true };
     } else {
         feedback.innerText = `Sai! Đáp án đúng: ${correct}. ${selectedQuestions[currentQuestionIndex].options[correct]}`;
         feedback.style.color = 'red';
-        userAnswers.push({ id: selectedQuestions[currentQuestionIndex].id, selected: option, correct: false });
+        userAnswers[currentQuestionIndex] = { id: selectedQuestions[currentQuestionIndex].id, selected: option, correct: false };
+    }
+    // Update question grid
+    const box = document.querySelector(`.question-box[data-index="${currentQuestionIndex}"]`);
+    if (box) {
+        box.classList.remove('unanswered');
+        box.classList.add('answered');
     }
     document.getElementById('next-btn').disabled = false;
 }
@@ -233,14 +289,16 @@ function showResult() {
     const detailedResults = document.getElementById('detailed-results');
     detailedResults.innerHTML = '<h3>Chi tiết câu trả lời:</h3>';
     userAnswers.forEach((answer, index) => {
-        const question = selectedQuestions[index];
-        const resultText = answer.correct
-            ? `Câu ${question.id}: Đúng (Bạn chọn ${answer.selected})`
-            : `Câu ${question.id}: Sai (Bạn chọn ${answer.selected || 'Không chọn'}, Đáp án đúng: ${question.correct})`;
-        const p = document.createElement('p');
-        p.innerText = resultText;
-        p.style.color = answer.correct ? 'green' : 'red';
-        detailedResults.appendChild(p);
+        if (answer) {
+            const question = selectedQuestions[index];
+            const resultText = answer.correct
+                ? `Câu ${question.id}: Đúng (Bạn chọn ${answer.selected})`
+                : `Câu ${question.id}: Sai (Bạn chọn ${answer.selected || 'Không chọn'}, Đáp án đúng: ${question.correct})`;
+            const p = document.createElement('p');
+            p.innerText = resultText;
+            p.style.color = answer.correct ? 'green' : 'red';
+            detailedResults.appendChild(p);
+        }
     });
 }
 
