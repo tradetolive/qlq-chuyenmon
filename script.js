@@ -30,14 +30,22 @@ document.addEventListener('DOMContentLoaded', () => {
             updateNumQuestionsOptions();
             displayPastScores();
             const startBtn = document.getElementById('start-btn');
-            startBtn.replaceWith(startBtn.cloneNode(true));
-            document.getElementById('start-btn').addEventListener('click', startQuiz);
-            document.getElementById('next-btn').addEventListener('click', nextQuestion);
-            document.getElementById('restart-btn').addEventListener('click', restartQuiz);
+            if (startBtn) {
+                startBtn.replaceWith(startBtn.cloneNode(true));
+                document.getElementById('start-btn').addEventListener('click', startQuiz);
+            } else {
+                console.error('Start button not found!');
+            }
+            const nextBtn = document.getElementById('next-btn');
+            if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
+            const restartBtn = document.getElementById('restart-btn');
+            if (restartBtn) restartBtn.addEventListener('click', restartQuiz);
         })
         .catch(error => {
             console.error('Lỗi tải câu hỏi:', error);
             alert('Không thể tải câu hỏi. Vui lòng kiểm tra file questions.json hoặc kết nối mạng.');
+            questions = [];
+            updateNumQuestionsOptions();
         });
 });
 
@@ -70,9 +78,20 @@ function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
-    document.getElementById('score-value').textContent = score;
+    const scoreValueElement = document.getElementById('score-value');
+    if (scoreValueElement) {
+        scoreValueElement.textContent = score;
+    } else {
+        console.error('Score value element not found!');
+    }
     document.getElementById('start-screen').style.display = 'none';
-    document.getElementById('quiz').style.display = 'block';
+    const quizElement = document.getElementById('quiz');
+    if (quizElement) {
+        quizElement.style.display = 'block';
+    } else {
+        console.error('Quiz element not found!');
+        return;
+    }
     loadQuestion();
 }
 
@@ -215,9 +234,14 @@ function restartQuiz() {
     selectedOption = null;
     selectedQuestions = [];
     userAnswers = [];
-    document.getElementById('quiz').style.display = 'none';
-    document.getElementById('result').style.display = 'none';
-    document.getElementById('start-screen').style.display = 'block';
+    clearInterval(timerId);
+    const quizElement = document.getElementById('quiz');
+    const resultElement = document.getElementById('result');
+    const startScreenElement = document.getElementById('start-screen');
+    if (quizElement) quizElement.style.display = 'none';
+    if (resultElement) resultElement.style.display = 'none';
+    if (startScreenElement) startScreenElement.style.display = 'block';
     updateNumQuestionsOptions();
     displayPastScores();
+    console.log('Questions after restart:', questions);
 }
