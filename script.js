@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
             questions = data;
             updateNumQuestionsOptions();
             displayPastScores();
+            const startBtn = document.getElementById('start-btn');
+            startBtn.replaceWith(startBtn.cloneNode(true));
             document.getElementById('start-btn').addEventListener('click', startQuiz);
             document.getElementById('next-btn').addEventListener('click', nextQuestion);
             document.getElementById('restart-btn').addEventListener('click', restartQuiz);
@@ -207,6 +209,7 @@ function showResult() {
 }
 
 function restartQuiz() {
+    console.log('Restarting quiz...');
     currentQuestionIndex = 0;
     score = 0;
     selectedOption = null;
@@ -215,5 +218,6 @@ function restartQuiz() {
     document.getElementById('quiz').style.display = 'none';
     document.getElementById('result').style.display = 'none';
     document.getElementById('start-screen').style.display = 'block';
+    updateNumQuestionsOptions();
     displayPastScores();
 }
