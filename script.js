@@ -5,7 +5,7 @@ let selectedOption = null;
 let selectedQuestions = [];
 let timeLeft = 600;
 let timerId;
-let userAnswers = []; // Lưu câu trả lời của người dùng để hiển thị chi tiết
+let userAnswers = [];
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             questions = data;
             updateNumQuestionsOptions();
+            displayPastScores();
             document.getElementById('start-btn').addEventListener('click', startQuiz);
             document.getElementById('next-btn').addEventListener('click', nextQuestion);
             document.getElementById('restart-btn').addEventListener('click', restartQuiz);
@@ -41,7 +42,13 @@ function updateNumQuestionsOptions() {
 
 function startQuiz() {
     const numQuestions = parseInt(document.getElementById('num-questions').value);
-    selectedQuestions = shuffleArray([...questions]).slice(0, numQuestions);
+    if (questions.length === 0) {
+        alert('Không có câu hỏi nào để bắt đầu!');
+        document.getElementById('start-screen').style.display = 'block';
+        document.getElementById('quiz').style.display = 'none';
+        return;
+    }
+    selectedQuestions = shuffleArray([...questions]).slice(0, Math.min(numQuestions, questions.length));
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
@@ -56,9 +63,9 @@ function loadQuestion() {
         showResult();
         return;
     }
-
     const questionData = selectedQuestions[currentQuestionIndex];
-    document.getElementById('question').innerText = `Câu ${questionData.id}: ${questionData.question}`;
+    document.getElementById('question').innerText = `Câu ${currentQuestionIndex + 1}/${selectedQuestions.length}: ${questionData.question}`;
+    document.getElementById('progress').style.width = `${((currentQuestionIndex + 1) / selectedQuestions.length * 100)}%`;
     const optionsDiv = document.getElementById('options');
     optionsDiv.innerHTML = '';
     document.getElementById('feedback').innerText = '';
@@ -66,9 +73,7 @@ function loadQuestion() {
     selectedOption = null;
     timeLeft = 600;
     document.getElementById('time-left').textContent = timeLeft;
-
     startTimer();
-
     const optionKeys = shuffleArray(Object.keys(questionData.options).filter(key => questionData.options[key] !== ''));
     optionKeys.forEach(key => {
         const button = document.createElement('button');
@@ -95,14 +100,17 @@ function selectOption(button, option) {
     if (selectedOption) return;
     selectedOption = option;
     clearInterval(timerId);
-
-    if (button) {
-        document.querySelectorAll('.option').forEach(btn => btn.classList.remove('selected'));
-        button.classList.add('selected');
-    }
-
     const correct = selectedQuestions[currentQuestionIndex].correct;
     const feedback = document.getElementById('feedback');
+    document.querySelectorAll('.option').forEach(btn => {
+        btn.disabled = true;
+        const btnKey = btn.innerText.split('.')[0];
+        if (btnKey === correct) {
+            btn.classList.add('correct');
+        } else if (btnKey === option && option !== correct) {
+            btn.classList.add('incorrect');
+        }
+    });
     if (option === null) {
         feedback.innerText = `Hết thời gian! Đáp án đúng: ${correct}. ${selectedQuestions[currentQuestionIndex].options[correct]}`;
         feedback.style.color = 'red';
@@ -126,13 +134,40 @@ function nextQuestion() {
     loadQuestion();
 }
 
+function saveScore() {
+    const pastScores = JSON.parse(localStorage.getItem('quizScores') || '[]');
+    pastScores.push({
+        score: `${score}/${selectedQuestions.length}`,
+        percentage: (score / selectedQuestions.length * 100).toFixed(2),
+        date: new Date().toLocaleString('vi-VN')
+    });
+    localStorage.setItem('quizScores', JSON.stringify(pastScores));
+}
+
+function displayPastScores() {
+    const pastScores = JSON.parse(localStorage.getItem('quizScores') || '[]');
+    const pastScoresDiv = document.getElementById('past-scores') || document.createElement('div');
+    pastScoresDiv.id = 'past-scores';
+    pastScoresDiv.innerHTML = '<h3>Lịch sử điểm:</h3>';
+    if (pastScores.length === 0) {
+        pastScoresDiv.innerHTML += '<p>Chưa có kết quả nào.</p>';
+    } else {
+        pastScores.forEach(score => {
+            const p = document.createElement('p');
+            p.innerText = `Ngày ${score.date}: ${score.score} (${score.percentage}%)`;
+            pastScoresDiv.appendChild(p);
+        });
+    }
+    document.getElementById('start-screen').appendChild(pastScoresDiv);
+}
+
 function showResult() {
     clearInterval(timerId);
+    saveScore();
     document.getElementById('quiz').style.display = 'none';
     const resultDiv = document.getElementById('result');
     resultDiv.style.display = 'block';
     document.getElementById('score').innerText = `Bạn đúng ${score}/${selectedQuestions.length} câu (${(score/selectedQuestions.length*100).toFixed(2)}%)`;
-
     const detailedResults = document.getElementById('detailed-results');
     detailedResults.innerHTML = '<h3>Chi tiết câu trả lời:</h3>';
     userAnswers.forEach((answer, index) => {
@@ -153,7 +188,8 @@ function restartQuiz() {
     selectedOption = null;
     selectedQuestions = [];
     userAnswers = [];
-    document.getElementById('quiz').style.display = 'block';
+    document.getElementById('quiz').style.display = 'none';
     document.getElementById('result').style.display = 'none';
     document.getElementById('start-screen').style.display = 'block';
+    displayPastScores();
 }
