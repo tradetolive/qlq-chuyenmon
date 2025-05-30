@@ -1,12 +1,12 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 20px;
     background-color: #f4f4f4;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     background: white;
     padding: 20px;
@@ -43,7 +43,7 @@ h1 {
 #progress-bar {
     width: 100%;
     background: #eee;
-    height: 10px;
+    height: 8px;
     border-radius: 5px;
     margin-bottom: 10px;
 }
@@ -59,13 +59,14 @@ h1 {
 .option {
     display: block;
     width: 100%;
-    padding: 10px;
-    margin: 5px 0;
+    padding: 12px;
+    margin: 8px 0;
     background: #eee;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     text-align: left;
+    font-size: 1em;
 }
 
 .option:hover {
@@ -95,7 +96,7 @@ h1 {
 #next-btn, #start-btn, #restart-btn {
     display: block;
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     background: #28a745;
     color: white;
     border: none;
@@ -129,7 +130,7 @@ h1 {
 }
 
 select {
-    padding: 5px;
+    padding: 8px;
     margin: 10px;
     font-size: 1em;
 }
@@ -152,42 +153,51 @@ select {
 
 #quiz {
     display: flex;
-    flex-wrap: wrap;
     gap: 20px;
+    flex-wrap: nowrap;
 }
 
 .quiz-content {
-    flex: 1;
-    min-width: 300px;
+    flex: 3;
+    min-width: 400px;
+    max-width: 800px;
 }
 
 #question-grid {
-    width: 150px;
-    padding: 10px;
+    flex: 1;
+    max-width: 200px;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+    padding: ک10px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
 #question-grid h4 {
     margin: 0 0 10px;
-    font-size: 1em;
+    font-size: 14px;
     text-align: center;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
+    grid-template-columns: repeat(var(--grid-columns, 3));
+    gap: 8px;
+    justify-items: center;
 }
 
 .question-box {
     width: 40px;
-    height: 40px;
-    display: flex;
+    height: 40px;    display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 0.9em;
+    font-size: 14px;
+    transition: background-color 0.2s;
 }
 
 .question-box.unanswered {
@@ -203,12 +213,29 @@ select {
     opacity: 0.8;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
+    #quiz {
+        flex-direction: column;
+    }
+    .quiz-content {
+        max-width: 100%;
+    }
+    #question-grid {
+        position: static;
+        max-width: 100%;
+        margin-top: 20px;
+    }
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    }
+}
+
+@media (min-width: 769px) {
     h1 {
-        font-size: 2em;
+        font-size: 1.5em;
     }
     .container {
-        max-width: 900px;
+        max-width: 1200px;
         padding: 30px;
     }
 }
