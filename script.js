@@ -3,7 +3,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let selectedOption = null;
 let selectedQuestions = [];
-let timeLeft = 600;
+let timeLeft = 600; // Thời gian tổng cho cả bài thi (600 giây = 10 phút)
 let timerId;
 let userAnswers = [];
 
@@ -83,6 +83,7 @@ function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
+    timeLeft = 600; // Reset thời gian tổng khi bắt đầu bài thi
     const quizHeader = document.querySelector('.quiz-header');
     if (quizHeader) {
         quizHeader.style.display = 'flex';
@@ -99,6 +100,7 @@ function startQuiz() {
     if (pastScores) pastScores.style.display = 'none';
     const clearScoresBtn = document.getElementById('clear-scores-btn');
     if (clearScoresBtn) clearScoresBtn.style.display = 'none';
+    startTimer(); // Bắt đầu đếm thời gian cho cả bài thi
     const gridContainer = document.querySelector('#question-grid .grid');
     gridContainer.innerHTML = '';
     const numCols = Math.ceil(Math.sqrt(selectedQuestions.length));
@@ -141,9 +143,6 @@ function loadQuestion() {
     document.getElementById('next-btn').disabled = true;
     selectedOption = null;
     if (!userAnswers[currentQuestionIndex]) {
-        timeLeft = 600;
-        document.getElementById('time-left').textContent = timeLeft;
-        startTimer();
         const optionKeys = shuffleArray(Object.keys(questionData.options).filter(key => questionData.options[key] !== ''));
         optionKeys.forEach(key => {
             const button = document.createElement('button');
@@ -187,7 +186,7 @@ function startTimer() {
         document.getElementById('time-left').textContent = timeLeft;
         if (timeLeft <= 0) {
             clearInterval(timerId);
-            selectOption(null, null);
+            showResult(); // Kết thúc bài thi khi hết thời gian
         }
     }, 1000);
 }
@@ -195,7 +194,6 @@ function startTimer() {
 function selectOption(button, option) {
     if (selectedOption) return;
     selectedOption = option;
-    clearInterval(timerId);
     const correct = selectedQuestions[currentQuestionIndex].correct;
     const feedback = document.getElementById('feedback');
     document.querySelectorAll('.option').forEach(btn => {
@@ -231,7 +229,6 @@ function selectOption(button, option) {
 }
 
 function nextQuestion() {
-    clearInterval(timerId);
     currentQuestionIndex++;
     loadQuestion();
 }
