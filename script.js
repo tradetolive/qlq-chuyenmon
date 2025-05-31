@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const nextBtn = document.getElementById('next-btn');
             if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) submitBtn.addEventListener('click', confirmSubmit);
             const restartBtn = document.getElementById('restart-btn');
             if (restartBtn) restartBtn.addEventListener('click', restartQuiz);
             const clearScoresBtn = document.getElementById('clear-scores-btn');
@@ -83,8 +85,8 @@ function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
-    timeLeft = 5400; // 90 phút = 5400 giây
-    document.getElementById('time-left').textContent = Math.floor(timeLeft / 60); // Hiển thị số phút ban đầu
+    timeLeft = 5400;
+    document.getElementById('time-left').textContent = Math.floor(timeLeft / 60);
     const quizHeader = document.querySelector('.quiz-header');
     if (quizHeader) {
         quizHeader.style.display = 'flex';
@@ -184,9 +186,14 @@ function startTimer() {
     clearInterval(timerId);
     timerId = setInterval(() => {
         timeLeft--;
-        document.getElementById('time-left').textContent = Math.floor(timeLeft / 60); // Hiển thị số phút
+        const minutesLeft = Math.floor(timeLeft / 60);
+        document.getElementById('time-left').textContent = minutesLeft;
+        if (timeLeft <= 300) { // Còn 5 phút
+            document.getElementById('time-left').classList.add('warning');
+        }
         if (timeLeft <= 0) {
             clearInterval(timerId);
+            alert('Hết thời gian! Bài thi của bạn đã kết thúc.');
             showResult();
         }
     }, 1000);
@@ -227,6 +234,13 @@ function selectOption(button, option) {
         box.classList.add('answered');
     }
     document.getElementById('next-btn').disabled = false;
+}
+
+function confirmSubmit() {
+    if (confirm('Bạn có chắc chắn muốn nộp bài không?')) {
+        clearInterval(timerId);
+        showResult();
+    }
 }
 
 function nextQuestion() {
