@@ -12,6 +12,8 @@
         <label for="num-questions">Số lượng câu hỏi: </label>
         <select id="num-questions"></select>
         <button id="start-btn">Bắt Đầu</button>
+        <div id="past-scores"></div>
+        <button id="clear-scores-btn">Xóa Lịch Sử Điểm</button>
     </div>
     <div id="quiz" style="display: none;">
         <div class="quiz-header">
@@ -19,12 +21,16 @@
             <div id="score">Điểm: <span id="score-value">0</span></div>
             <div id="progress-container"><div id="progress"></div></div>
         </div>
-        <div id="question"></div>
-        <div id="options"></div>
-        <div id="feedback"></div>
-        <button id="next-btn" disabled>Tiếp Theo</button>
-        <div id="question-grid">
-            <div class="grid"></div>
+        <div class="quiz-content">
+            <div id="question-content">
+                <div id="question"></div>
+                <div id="options"></div>
+                <div id="feedback"></div>
+                <button id="next-btn" disabled>Tiếp Theo</button>
+            </div>
+            <div id="question-grid">
+                <div class="grid"></div>
+            </div>
         </div>
     </div>
     <div id="result" style="display: none;">
@@ -33,8 +39,6 @@
         <div id="detailed-results"></div>
         <button id="restart-btn">Làm Lại</button>
     </div>
-    <div id="past-scores"></div>
-    <button id="clear-scores-btn">Xóa Lịch Sử Điểm</button>
     <script src="script.js"></script>
 </body>
 </html>
