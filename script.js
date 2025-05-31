@@ -3,7 +3,7 @@ let currentQuestionIndex = 0;
 let score = 0;
 let selectedOption = null;
 let selectedQuestions = [];
-let timeLeft = 600; // Thời gian tổng cho cả bài thi (600 giây = 10 phút)
+let timeLeft = 5400; // 90 phút = 5400 giây
 let timerId;
 let userAnswers = [];
 
@@ -83,7 +83,8 @@ function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
     userAnswers = [];
-    timeLeft = 600; // Reset thời gian tổng khi bắt đầu bài thi
+    timeLeft = 5400; // 90 phút = 5400 giây
+    document.getElementById('time-left').textContent = Math.floor(timeLeft / 60); // Hiển thị số phút ban đầu
     const quizHeader = document.querySelector('.quiz-header');
     if (quizHeader) {
         quizHeader.style.display = 'flex';
@@ -100,7 +101,7 @@ function startQuiz() {
     if (pastScores) pastScores.style.display = 'none';
     const clearScoresBtn = document.getElementById('clear-scores-btn');
     if (clearScoresBtn) clearScoresBtn.style.display = 'none';
-    startTimer(); // Bắt đầu đếm thời gian cho cả bài thi
+    startTimer();
     const gridContainer = document.querySelector('#question-grid .grid');
     gridContainer.innerHTML = '';
     const numCols = Math.ceil(Math.sqrt(selectedQuestions.length));
@@ -183,10 +184,10 @@ function startTimer() {
     clearInterval(timerId);
     timerId = setInterval(() => {
         timeLeft--;
-        document.getElementById('time-left').textContent = timeLeft;
+        document.getElementById('time-left').textContent = Math.floor(timeLeft / 60); // Hiển thị số phút
         if (timeLeft <= 0) {
             clearInterval(timerId);
-            showResult(); // Kết thúc bài thi khi hết thời gian
+            showResult();
         }
     }, 1000);
 }
