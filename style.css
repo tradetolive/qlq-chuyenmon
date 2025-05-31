@@ -47,7 +47,7 @@ body {
 }
 
 #question-content {
-    flex: 3; /* Chiếm 3/4 diện tích */
+    flex: 4; /* Tăng diện tích lên 4/5 */
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -109,7 +109,7 @@ body {
 }
 
 #question-grid {
-    flex: 1; /* Chiếm 1/4 diện tích */
+    flex: 1; /* Giảm diện tích xuống 1/5 */
     position: sticky;
     top: 20px;
     align-self: flex-start;
@@ -123,14 +123,15 @@ body {
 }
 
 .question-box {
-    width: 40px;
-    height: 40px;
+    width: 30px; /* Giảm kích thước ô */
+    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #ddd;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 0.9em;
 }
 
 .question-box.unanswered {
@@ -164,4 +165,47 @@ body {
 
 .score-text, .percentage-text {
     margin: 5px 0;
+}
+
+/* Tối ưu cho iPhone và màn hình nhỏ */
+@media (max-width: 768px) {
+    .quiz-content {
+        flex-direction: column; /* Chuyển thành cột trên màn hình nhỏ */
+        gap: 10px;
+    }
+
+    #question-content {
+        flex: none; /* Bỏ flex để chiếm toàn bộ chiều rộng */
+        width: 100%;
+    }
+
+    #question-grid {
+        flex: none;
+        position: static; /* Bỏ sticky trên mobile */
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: center;
+    }
+
+    .question-box {
+        width: 25px; /* Giảm kích thước hơn nữa trên mobile */
+        height: 25px;
+        font-size: 0.8em;
+    }
+
+    #question {
+        font-size: 1.2em; /* Giảm font size cho phù hợp */
+    }
+
+    .option {
+        font-size: 0.9em;
+        padding: 8px;
+    }
 }
