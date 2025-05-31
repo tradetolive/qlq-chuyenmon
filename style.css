@@ -1,11 +1,14 @@
+/* Thêm font Google */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0;
     padding: 20px;
-    background-color: #f0f0f0;
+    background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%); /* Gradient nền */
 }
 
 #start-screen, #quiz, #result {
@@ -23,6 +26,11 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+}
+
+#time-left.warning {
+    color: #f44336; /* Màu đỏ khi còn 5 phút */
+    font-weight: 500;
 }
 
 #progress-container {
@@ -47,7 +55,7 @@ body {
 }
 
 #question-content {
-    flex: 4; /* Tăng diện tích lên 4/5 */
+    flex: 4;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -56,6 +64,8 @@ body {
 #question {
     font-size: 1.5em;
     margin-bottom: 10px;
+    font-weight: 500;
+    color: #333;
 }
 
 #options {
@@ -70,11 +80,12 @@ body {
     border: 1px solid #ddd;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.1s;
 }
 
 .option:hover {
     background: #e0e0e0;
+    transform: scale(1.02); /* Hiệu ứng phóng to nhẹ */
 }
 
 .option.correct {
@@ -92,7 +103,7 @@ body {
     font-weight: bold;
 }
 
-#next-btn {
+#next-btn, #submit-btn {
     padding: 10px 20px;
     background: #4caf50;
     color: white;
@@ -101,6 +112,12 @@ body {
     cursor: pointer;
     margin-top: 10px;
     width: fit-content;
+    transition: background 0.3s, transform 0.1s;
+}
+
+#next-btn:hover, #submit-btn:hover {
+    background: #45a049;
+    transform: scale(1.05);
 }
 
 #next-btn:disabled {
@@ -108,8 +125,16 @@ body {
     cursor: not-allowed;
 }
 
+#submit-btn {
+    background: #ff9800; /* Màu cam để phân biệt */
+}
+
+#submit-btn:hover {
+    background: #fb8c00;
+}
+
 #question-grid {
-    flex: 1; /* Giảm diện tích xuống 1/5 */
+    flex: 1;
     position: sticky;
     top: 20px;
     align-self: flex-start;
@@ -123,7 +148,7 @@ body {
 }
 
 .question-box {
-    width: 30px; /* Giảm kích thước ô */
+    width: 30px;
     height: 30px;
     display: flex;
     justify-content: center;
@@ -132,6 +157,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     font-size: 0.9em;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .question-box.unanswered {
@@ -156,6 +182,27 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+}
+
+#clear-scores-btn:hover {
+    background: #e53935;
+    transform: scale(1.05);
+}
+
+#start-btn, #restart-btn {
+    padding: 10px 20px;
+    background: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s;
+}
+
+#start-btn:hover, #restart-btn:hover {
+    background: #1e88e5;
+    transform: scale(1.05);
 }
 
 #result-score {
@@ -170,18 +217,18 @@ body {
 /* Tối ưu cho iPhone và màn hình nhỏ */
 @media (max-width: 768px) {
     .quiz-content {
-        flex-direction: column; /* Chuyển thành cột trên màn hình nhỏ */
+        flex-direction: column;
         gap: 10px;
     }
 
     #question-content {
-        flex: none; /* Bỏ flex để chiếm toàn bộ chiều rộng */
+        flex: none;
         width: 100%;
     }
 
     #question-grid {
         flex: none;
-        position: static; /* Bỏ sticky trên mobile */
+        position: static;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -195,17 +242,17 @@ body {
     }
 
     .question-box {
-        width: 25px; /* Giảm kích thước hơn nữa trên mobile */
-        height: 25px;
+        width: 28px; /* Tăng nhẹ để dễ thao tác */
+        height: 28px;
         font-size: 0.8em;
     }
 
     #question {
-        font-size: 1.2em; /* Giảm font size cho phù hợp */
+        font-size: 1.2em;
     }
 
     .option {
         font-size: 0.9em;
-        padding: 8px;
+        padding: 10px; /* Tăng padding */
     }
 }
