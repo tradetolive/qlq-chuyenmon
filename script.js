@@ -95,6 +95,10 @@ function startQuiz() {
     document.getElementById('start-screen').style.display = 'none';
     const quizElement = document.getElementById('quiz');
     if (quizElement) quizElement.style.display = 'block';
+    const pastScores = document.getElementById('past-scores');
+    if (pastScores) pastScores.style.display = 'none';
+    const clearScoresBtn = document.getElementById('clear-scores-btn');
+    if (clearScoresBtn) clearScoresBtn.style.display = 'none';
     const gridContainer = document.querySelector('#question-grid .grid');
     gridContainer.innerHTML = '';
     const numCols = Math.ceil(Math.sqrt(selectedQuestions.length));
@@ -308,7 +312,7 @@ function restartQuiz() {
     clearInterval(timerId);
     const scoreValueElement = document.getElementById('score-value');
     if (scoreValueElement) {
-        scoreValueElement.textContent = `0/0`; // Reset to 0/0 until new quiz starts
+        scoreValueElement.textContent = `0/0`;
         console.log('Score reset in restartQuiz to:', scoreValueElement.textContent);
     }
     const quizHeader = document.querySelector('.quiz-header');
@@ -316,6 +320,10 @@ function restartQuiz() {
     document.getElementById('quiz').style.display = 'none';
     document.getElementById('result').style.display = 'none';
     document.getElementById('start-screen').style.display = 'block';
+    const pastScores = document.getElementById('past-scores');
+    if (pastScores) pastScores.style.display = 'block';
+    const clearScoresBtn = document.getElementById('clear-scores-btn');
+    if (clearScoresBtn) clearScoresBtn.style.display = 'block';
     updateNumQuestionsOptions();
     displayPastScores();
 }
