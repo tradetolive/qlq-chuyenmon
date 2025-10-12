@@ -1,26 +1,38 @@
 [
-        {
-        "id": 1,
-        "question": "Tổng giám đốc công ty chứng khoán phải đáp ứng các tiêu chuẩn sau đây:",
-        "options": {
-            "A": "Có chứng chỉ hành nghề môi giới chứng khoán",
-            "B": "Có chứng chỉ hành nghề môi giới chứng khoán hoặc chứng chỉ hành nghề phân tích tài chính",
-            "C": "Có chứng chỉ hành nghề môi giới chứng khoán hoặcc chứng chỉ hành nghề quản lý quỹ",
-            "D": "Có chứng chỉ hành nghề phân tích tài chính hoặc chứng chỉ hành nghề quản lý quỹ",
-            "E": ""
-        },
-        "correct": "D"
+  {
+    "id": 1,
+    "question": "Tổng giám đốc công ty chứng khoán phải đáp ứng các tiêu chuẩn sau đây:<br><img src='images/director.png' alt='Tổng giám đốc' width='150'>",
+    "options": {
+      "A": "Có chứng chỉ hành nghề môi giới chứng khoán",
+      "B": "Có chứng chỉ hành nghề môi giới chứng khoán hoặc chứng chỉ hành nghề phân tích tài chính",
+      "C": "Có chứng chỉ hành nghề môi giới chứng khoán hoặc chứng chỉ hành nghề quản lý quỹ",
+      "D": "Có chứng chỉ hành nghề phân tích tài chính hoặc chứng chỉ hành nghề quản lý quỹ",
+      "E": ""
     },
-    {
-        "id": 2,
-        "question": "Công ty chứng khoán nước ngoài và công ty quản lý quỹ nước ngoài được lập bao nhiêu chi \nnhánh tại Việt Nam?",
-        "options": {
-            "A": "01",
-            "B": "02",
-            "C": "03",
-            "D": "04",
-            "E": ""
-        },
-        "correct": "A"
-    }
+    "correct": "D"
+  },
+  {
+    "id": 2,
+    "question": "Công ty chứng khoán nước ngoài và công ty quản lý quỹ nước ngoài được lập bao nhiêu chi nhánh tại Việt Nam?<br><b>Bảng minh họa:</b><br><table><tr><th>Công ty</th><th>Số chi nhánh</th></tr><tr><td>Chứng khoán nước ngoài</td><td>01</td></tr><tr><td>Quản lý quỹ nước ngoài</td><td>01</td></tr></table>",
+    "options": {
+      "A": "01",
+      "B": "02",
+      "C": "03",
+      "D": "04",
+      "E": ""
+    },
+    "correct": "A"
+  },
+  {
+    "id": 3,
+    "question": "Công thức tính lợi nhuận đầu tư sau $n$ năm:<br>$$L = P(1 + r)^n - P$$<br>Trong đó:<br>- $L$: Lợi nhuận<br>- $P$: Số tiền đầu tư ban đầu<br>- $r$: lãi suất hàng năm<br>- $n$: số năm",
+    "options": {
+      "A": "$$L = P \\times r \\times n$$",
+      "B": "$$L = P(1 + r)^n - P$$",
+      "C": "$$L = P(1 + n \\times r)$$",
+      "D": "$$L = P(1 - r)^n - P$$",
+      "E": ""
+    },
+    "correct": "B"
+  }
 ]
