@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "question": "Tổng giám đốc công ty chứng khoán phải đáp ứng các tiêu chuẩn sau đây:<br><img src='images/director.png' alt='Tổng giám đốc' width='150'>",
+    "question": "Tổng giám đốc công ty chứng khoán phải đáp ứng các tiêu chuẩn sau đây:<br><img src='images/director.png' alt='Hình minh họa tổng giám đốc' width='120'>",
     "options": {
       "A": "Có chứng chỉ hành nghề môi giới chứng khoán",
       "B": "Có chứng chỉ hành nghề môi giới chứng khoán hoặc chứng chỉ hành nghề phân tích tài chính",
@@ -13,7 +13,7 @@
   },
   {
     "id": 2,
-    "question": "Công ty chứng khoán nước ngoài và công ty quản lý quỹ nước ngoài được lập bao nhiêu chi nhánh tại Việt Nam?<br><b>Bảng minh họa:</b><br><table><tr><th>Công ty</th><th>Số chi nhánh</th></tr><tr><td>Chứng khoán nước ngoài</td><td>01</td></tr><tr><td>Quản lý quỹ nước ngoài</td><td>01</td></tr></table>",
+    "question": "Bảng minh họa số lượng chi nhánh:<br><table><tr><th>Loại công ty</th><th>Số chi nhánh</th></tr><tr><td>Chứng khoán nước ngoài</td><td>01</td></tr><tr><td>Quản lý quỹ nước ngoài</td><td>01</td></tr></table><br>Công ty chứng khoán nước ngoài và công ty quản lý quỹ nước ngoài được lập bao nhiêu chi nhánh tại Việt Nam?",
     "options": {
       "A": "01",
       "B": "02",
