@@ -2,53 +2,26 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Một số câu hỏi phần chuyên môn - Ôn thi CCHN Quản lý quỹ</title>
+    <title>Trắc nghiệm chuyên môn</title>
     <link rel="stylesheet" href="style.css">
-    <!-- MathJax CDN -->
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax để hiển thị công thức toán học -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-    <div id="start-screen">
-        <h1>Chào mừng đến với Quiz</h1>
-        <label for="num-questions">Số lượng câu hỏi: </label>
-        <select id="num-questions"></select>
-        <button id="start-btn">Bắt Đầu</button>
-        <div id="past-scores"></div>
-        <button id="clear-scores-btn">Xóa Lịch Sử Điểm</button>
-    </div>
-    <div id="quiz" style="display: none;">
-        <div class="quiz-header">
-            <div>Thời gian còn lại: <span id="time-left">90</span> phút</div>
-            <div id="score">Điểm: <span id="score-value">0</span></div>
-            <div id="progress-container"><div id="progress"></div></div>
+    <div class="container">
+        <h1>Trắc nghiệm chuyên môn</h1>
+        <div id="question-area">
+            <div id="question"></div>
+            <div id="answers"></div>
         </div>
-        <div class="quiz-content">
-            <div id="question-content">
-                <div id="question"></div>
-                <div id="options"></div>
-                <div id="feedback">
-                    <div id="feedback-message"></div>
-                    <div id="explanation"></div>
-                    <div id="reference"></div>
-                </div>
-                <div class="button-group">
-                    <button id="next-btn" disabled>Tiếp Theo</button>
-                    <button id="submit-btn">Nộp Bài</button>
-                </div>
-            </div>
-            <div id="question-grid">
-                <div class="grid"></div>
-            </div>
+        <div id="controls">
+            <button id="prev-btn">Trước</button>
+            <button id="next-btn">Sau</button>
+            <button id="submit-btn">Nộp bài</button>
         </div>
-    </div>
-    <div id="result" style="display: none;">
-        <h2>Kết Quả</h2>
-        <div id="result-score"></div>
-        <div id="detailed-results"></div>
-        <button id="restart-btn">Làm Lại</button>
+        <div id="result"></div>
     </div>
     <script src="script.js"></script>
 </body>
