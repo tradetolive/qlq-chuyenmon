@@ -13,7 +13,7 @@
   },
   {
     "id": 2,
-    "question": "Bảng minh họa số lượng chi nhánh:<br><table><tr><th>Loại công ty</th><th>Số chi nhánh</th></tr><tr><td>Chứng khoán nước ngoài</td><td>01</td></tr><tr><td>Quản lý quỹ nước ngoài</td><td>01</td></tr></table><br>Công ty chứng khoán nước ngoài và công ty quản lý quỹ nước ngoài được lập bao nhiêu chi nhánh tại Việt Nam?",
+    "question": "Cổ phiếu A có giá 11.000đ và không thanh toán cổ tức. Người ta yêu cầu 100 nhà phân tích dự đoán giá CP A vào cuối năm kết quả như sau:<br><table><tr><th>Giá dự kiến (ki)</th><th>Số nhà phân tích (Pi)</th></tr><tr><td>dự đoán</td><td>01</td></tr><tr><td>Quản lý quỹ nước ngoài</td><td>01</td></tr></table><br>Công ty chứng khoán nước ngoài và công ty quản lý quỹ nước ngoài được lập bao nhiêu chi nhánh tại Việt Nam?",
     "options": {
       "A": "01",
       "B": "02",
@@ -34,5 +34,693 @@
       "E": ""
     },
     "correct": "B"
-  }
+  },
+  {
+    "id": 1,
+    "question": "Mức lợi nhuận phi rủi ro hiện là 7%. Mức sinh lời của một CP trên thị trường hiện là 15%. Biết rằng với hệ số beta là 1,3 mức sinh lời kỳ vọng tương ứng của CP này là 12% bạn sẽ:",
+    "options": {
+      "A": "Mua CP này vì nó bị định giá cao hơn giá trị thực",
+      "B": "Bán khống CP này vì nó bị định giá cao hơn giá trị thực",
+      "C": "Bán khống CP này vì nó bị định giá thấp hơn giá trị thực",
+      "D": "Mua CP này vì nó bị định giá thấp hơn giá trị thực",
+      "E": "Không làm gì cả vì CP này đang có mức giá cân bằng hợp lý"
+    },
+    "correct": "B"
+  },
+  {
+"id": 1,
+"question": "Mức lợi nhuận phi rủi ro hiện là 7%. Mức sinh lời của một CP trên thị trường hiện là 15%. Biết rằng với hệ số beta là 1,3 mức sinh lời kỳ vọng tương ứng của CP này là 12% bạn sẽ:",
+"options": {
+"A": "Mua CP này vì nó bị định giá cao hơn giá trị thực",
+"B": "Bán khống CP này vì nó bị định giá cao hơn giá trị thực",
+"C": "Bán khống CP này vì nó bị định giá thấp hơn giá trị thực",
+"D": "Mua CP này vì nó bị định giá thấp hơn giá trị thực",
+"E": "Không làm gì cả vì CP này đang có mức giá cân bằng hợp lý"
+},
+"correct": "B"
+},
+{
+"id": 2,
+"question": "Trong một danh mục đầu tư được đa dạng hóa tốt:",
+"options": {
+"A": "Rủi ro thị trường được coi như không đáng kể",
+"B": "Rủi ro riêng lẻ được coi như không đáng kể",
+"C": "Rủi ro hệ thống được coi như không đáng kể",
+"D": "Rủi ro không thể đa dạng hóa được coi như không đáng kể",
+"E": ""
+},
+"correct": "B"
+},
+{
+"id": 3,
+"question": "Mức sinh lời kỳ vọng của một CP có hệ số beta = 0 có nghĩa là:",
+"options": {
+"A": "Là lãi suất phi rủi ro",
+"B": "Bằng 0",
+"C": "Mang giá trị âm",
+"D": "Bằng mức sinh lời của thị trường",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 4,
+"question": "Giả sử một CP được định giá hợp lý và có mức sinh lời kỳ vọng là 13%. Mức sinh lời kỳ vọng của thị trường là 13% và hệ số rủi ro là 4%. Hệ số beta của CP này là:",
+"options": {
+"A": "1,25",
+"B": "1,7",
+"C": "1",
+"D": "0,95",
+"E": ""
+},
+"correct": "C"
+},
+{
+"id": 5,
+"question": "Xét một danh mục đầu tư bao gồm 1 triệu USD đầu tư vào trái phiếu chiết khấu có kỳ hạn 5 năm và 4 triệu USD đầu tư vào trái phiếu chiết khấu có kỳ hạn 10 năm. Thời gian đáo hạn bình quân của danh mục là 9 năm. Giả định rằng loại trái phiếu rẻ nhất để giao cho hợp đồng tương lai kỳ hạn 3 tháng đối với trái phiếu kho bạc là trái phiếu chiết khấu có kỳ hạn 8 năm. Giá của hợp đồng tương lai hiện tại là 90-16, và mỗi hợp đồng tương lai trái phiếu có mệnh giá là 100.000 USD. Để phòng ngừa rủi ro cho danh mục trái phiếu trong vòng 3 tháng tới, nhà đầu tư nên sử dụng:",
+"options": {
+"A": "52 hợp đồng",
+"B": "62 hợp đồng",
+"C": "72 hợp đồng",
+"D": "82 hợp đồng",
+"E": ""
+},
+"correct": "C"
+},
+{
+"id": 6,
+"question": "Nhà đầu tư muốn tạo lập danh mục X gồm quỹ A và B. Mức sinh lời của danh mục X là 16%. Nếu bạn được yêu cầu tính độ lệch chuẩn danh mục X, câu trả lời của bạn sẽ là:",
+"options": {
+"A": "15,62%",
+"B": "24,58%",
+"C": "20,59%",
+"D": "Không có câu trả lời nào trên đây là đúng",
+"E": ""
+},
+"correct": "C"
+},
+{
+"id": 7,
+"question": "Xem xét một danh mục đầu tư vào CP hàng đầu của Thụy Sỹ và được đa dạng hóa tốt. Giá trị thị trường của danh mục là 3.500.000 EUR. Giá của hợp đồng tương lai được xác định theo chỉ số SMI ở mức 5.000 (quy mô hợp đồng là 50EUR/ một điểm chỉ số). Để phòng ngừa rủi ro tổng thể cho danh mục này trước những biến động của thị trường nhà đầu tư cần phải:",
+"options": {
+"A": "Mua 14 hợp đồng tương lai SMI",
+"B": "Mua ít hơn 14 hợp đồng tương lai SMI do tính đến sự tương quan về rủi ro",
+"C": "Bán 14 hợp đồng tương lai SMI",
+"D": "Không có đáp án đúng",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 8,
+"question": "Một nhà đầu tư dự định đầu tư 100 triệu đồng trong 2,5 năm vào danh mục gồm các trái phiếu sau: + Trái phiếu chiết khấu A, thời hạn 3 năm, mệnh giá 100.000 đ. + Trái phiếu B, lãi suất coupon 6%, thời hạn 2 năm, mệnh giá 100.000 đ. Lãi suất thị trường hiện nay là 10%. Để phòng ngừa rủi ro lãi suất cho danh mục đầu tư, tỷ trọng đầu tư vào trái phiếu A và B lần lượt phải là:",
+"options": {
+"A": "40%; 60%",
+"B": "43%; 57%",
+"C": "50%; 50%",
+"D": "53%; 47%",
+"E": ""
+},
+"correct": "D"
+},
+{
+"id": 9,
+"question": "Bạn có một danh mục đầu tư theo chiến lược phân bổ vốn cố định (60% vào CP, 40% vào trái phiếu) và tái cân bằng theo tuần. Một tuần trước đây, giá trị của danh mục đầu tư này là 30 triệu EUR, mức sinh lời của thị trường CP là +4% và của thị trường trái phiếu là -0,5%. Bạn phải tái cân bằng danh mục của mình để tuân thủ theo mức phân bổ vốn cố định. Vậy sau khi thực hiện tái cân bằng danh mục, giá trị đầu tư vào CP của danh mục sẽ là:",
+"options": {
+"A": "18 triệu EUR",
+"B": "18,4 triệu EUR",
+"C": "18,5 triệu EUR",
+"D": "18,7 triệu EUR",
+"E": "Không có câu trả lời nào trên đây là đúng"
+},
+"correct": "E"
+},
+{
+"id": 10,
+"question": "Thời gian đáo hạn bình quân có điều chỉnh (MD) của một danh mục trái phiếu là 7 năm và lãi suất theo yêu cầu đối với danh mục này là 12%/năm. Nếu mức lãi suất theo yêu cầu của danh mục này giảm xuống 11%/năm giá trị của danh mục trái phiếu sẽ thay đổi như sau:",
+"options": {
+"A": "Tăng 6%",
+"B": "Giảm 6,5%",
+"C": "Tăng 7%",
+"D": "",
+"E": ""
+},
+"correct": "C"
+},
+{
+"id": 11,
+"question": "Một danh mục …. gồm 3 tài sản rủi ro, mức sinh lời của các tài sản này không tương quan nhau (hệ số tương quan = 0). Tất cả các tài sản này đều có mức sinh lời kỳ vọng và phương sai như nhau. Danh mục nào dưới đây được coi là danh mục tối ưu, nếu không tính đến đường cong bang quan của nhà đầu tư (không tính đến mức ngại rủi ro).",
+"options": {
+"A": "Một danh mục được tạo nên từ một loại tài sản duy nhất",
+"B": "Bất kỳ tỷ trọng đầu tư nào vào các tài sản đều là tối ưu",
+"C": "Một danh mục đầu tư theo các phần bằng nhau vao ba tài sản",
+"D": "Không có câu trả lời nào trên đây là đúng",
+"E": ""
+},
+"correct": "B"
+},
+{
+"id": 12,
+"question": "Bạn đang quản lý một danh mục với tổng giá trị là 50 triệu EUR. Hệ số beta của danh mục là 0,8 so với chỉ số SMI. Bây giờ bạn muốn tăng hệ số beta của danh mục lên 1,2. Chỉ số SMI hiện tại ở mức 5400 (quy mô hợp đồng là 50 EUR/một điểm chỉ số). Bạn sẽ làm gì?",
+"options": {
+"A": "Bán 74 hợp đồng tương lai SMI",
+"B": "Mua 74 hợp đồng tương lai SMI",
+"C": "Bán 148 hợp đồng tương lai SMI",
+"D": "Mua 148 hợp đồng tương lai SMI",
+"E": "Không có câu trả lời nào trên đây là đúng"
+},
+"correct": "B"
+},
+{
+"id": 13,
+"question": "Một danh mục CP có hệ số tương quan =0,85 với chỉ số SMI. Độ lệch chuẩn của danh mục đầu tư này là 22%. Nếu danh mục đầu tư được phòng ngừa rủi ro bằng hợp đồng tương lai chỉ số SMI theo phương pháp phương sai tối thiểu, rủi ro còn lại của danh mục là:",
+"options": {
+"A": "18,7%",
+"B": "15,9%",
+"C": "11.59%",
+"D": "Không có câu trả lời nào trên đây là đúng",
+"E": ""
+},
+"correct": "C"
+},
+{
+"id": 14,
+"question": "Để giải quyết sự thiếu hụt tiền mặt trong ngắn hạn, khách hàng của bạn đã quyết định bán 20 triệu USD trái phiếu kho bạc. Anh ta định sẽ mua lại số trái phiếu này sau 6 tháng nữa và do đó rất lo ngại lãi suất sẽ diễn biến theo hướng bất lợi. Để phòng ngừa rủi ro này, khách muốn sử dụng các hợp đồng chứng khoán phái sinh giao dịch thích hợp nhất mà người này nên nắm giữ là:",
+"options": {
+"A": "Mua hợp đồng tương lai tín phiếu kho bạc",
+"B": "Mua hợp đồng tương lai trái phiếu kho bạc",
+"C": "Bán hợp đồng tương lai tín phiếu kho bạc",
+"D": "Bán hợp đồng tương lai trái phiếu kho bạc",
+"E": "Thỏa thuận lãi suất kỳ hạn (FRA)"
+},
+"correct": "B"
+},
+{
+"id": 15,
+"question": "Mức sinh lời …. đầy đủ và hoàn hảo phải bằng:",
+"options": {
+"A": "0",
+"B": "Lãi suất phi rủi ro",
+"C": "Mức sinh lời kỳ vọng đối với danh mục thị trường",
+"D": "Không có câu trả lời nào trên đây là đúng",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 16,
+"question": "Một nhà đầu cơ mua 10 quyền chọn bán đối với đồng Bảng Anh (GBP) đáo hạn vào tháng 3 với giá thực hiện là 1,5 USD. Giá giao ngay hiện thời là 1,55USD/1GBP, và phí mua quyền chọn là 0,02 USD/quyền. Ngay trước thời điểm đáo hạn, giá giao ngay đạt mức là 1,48 USD và nhà đầu cơ thực hiện quyền chọn. Giả định một hợp đồng quyền chọn có quy mô là 31.250 GDP. Lãi/lỗ từ giao dịch này là:",
+"options": {
+"A": "0 USD",
+"B": "Lãi 6250 USD",
+"C": "Lỗ 3125 USD",
+"D": "Không có câu nào đúng",
+"E": ""
+},
+"correct": "D"
+},
+{
+"id": 17,
+"question": "Đầu tư vào 1 danh mục nằm ngoài đường biên hiệu quả không phải là điều mà lý thuyết danh mục đầu tư hiệu quả của Markowitz",
+"options": {
+"A": "Đúng",
+"B": "Sai",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "B"
+},
+{
+"id": 18,
+"question": "Theo mô hình danh mục 2 tài sản nếu hệ số tương quan giữa các tài sản là âm 1 (-1). Khi đó bất kỳ sự kết hợp tỷ trọng đầu tư nào giữa 2 tài sản sẽ tạo ra mức rủi ro = 0 cho danh mục. Với tổng tỷ trọng đầu tư của 2 tài sản = 1.",
+"options": {
+"A": "Đúng",
+"B": "Sai",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "B"
+},
+{
+"id": 19,
+"question": "Mô hình định giá tài sản vốn chỉ bao gồm các danh mục đầu tư hiệu quả.",
+"options": {
+"A": "Đúng",
+"B": "Sai",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "B"
+},
+{
+"id": 20,
+"question": "Danh mục chứng khoán sẽ có mức rủi ro phi hệ thống thấp hơn so với chứng riêng rẽ:",
+"options": {
+"A": "Đúng",
+"B": "Sai",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 21,
+"question": "Rủi ro hệ thống thường được giảm bớt bởi đa dạng hóa ngẫu nhiên:",
+"options": {
+"A": "Đúng",
+"B": "Sai",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "B"
+},
+{
+"id": 22,
+"question": "Quản lý danh mục đầu tư chủ động khác với quản lý danh mục đầu tư thụ động.",
+"options": {
+"A": "Chúng ta thường bỏ qua yếu tố danh mục đầu tư chuẩn khi so sánh",
+"B": "Chúng ta không sử dụng bất kỳ dự đoán nào về các mức lợi nhuận kỳ vọng",
+"C": "Chúng ta không hề cố gắng kiểm soát rủi ro",
+"D": "Tất cả đều sai",
+"E": ""
+},
+"correct": "D"
+},
+{
+"id": 23,
+"question": "Đối với người sở hữu chứng chỉ đầu tư giá trị tài sản được đo lường thông qua thước đo nào:",
+"options": {
+"A": "Tỷ suất lợi nhuận đầu tư",
+"B": "Tỷ suất lợi nhuận đầu tư bình quân",
+"C": "Tỷ suất lợi nhuận đầu tư bình quân gia quyền với quyền số là thời gian",
+"D": "Không có câu nào đúng",
+"E": ""
+},
+"correct": "D"
+},
+{
+"id": 24,
+"question": "Trong một danh mục đầu tư được đa dạng hóa tốt:",
+"options": {
+"A": "Rủi ro thị trường được coi như không đáng kể",
+"B": "Rủi ro riêng lẻ được coi như không đáng kể",
+"C": "Rủi ro hệ thống được coi như không đáng kể",
+"D": "",
+"E": ""
+},
+"correct": "B"
+},
+{
+"id": 25,
+"question": "Theo mô hình định giá tài sản vốn mức sinh lời kỳ vọng chứng khoán được xác định bởi đẳng thức nào:",
+"options": {
+"A": "E(Ri) = Rf",
+"B": "E(Ri)= Rf + βi (E(R) – Rf) đường SML",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "B"
+},
+{
+"id": 26,
+"question": "Rủi ro thị trường của 1 cổ phiếu được đo lường qua hệ số beta bằng:",
+"options": {
+"A": "Phương sai mức sinh lời cổ phiếu/ Phương sai mức sinh lời thị trường",
+"B": "Hiệp phương sai mức sinh lời cổ phiếu và thị trường/ Phương sai mức sinh lời thị trường",
+"C": "Tất cả đều sai",
+"D": "",
+"E": ""
+},
+"correct": "B"
+},
+{
+"id": 27,
+"question": "Các yếu tố nào sau đây ảnh hưởng đến lợi nhuận cổ phiếu:",
+"options": {
+"A": "Biến động lãi suất",
+"B": "Chu kỳ kinh doanh",
+"C": "Lạm phát",
+"D": "Chỉ có a và b",
+"E": "Tất cả"
+},
+"correct": "E"
+},
+{
+"id": 28,
+"question": "Lý thuyết giao dịch chênh lệch giá (APT) khác với lý thuyết định giá tài sản vốn (CAPM) vì:",
+"options": {
+"A": "Nhấn mạnh hơn vào rủi ro thị trường",
+"B": "Giảm thiểu hóa tầm quan trọng của đa dạng hóa rủi ro",
+"C": "Công nhận rủi ro hệ thống gồm nhiều yếu tố tạo nên",
+"D": "",
+"E": ""
+},
+"correct": "C"
+},
+{
+"id": 29,
+"question": "Đường thị trường chứng khoán và đường thị trường vốn đều cùng thể hiện mối quan hệ tuyến tính giữa rủi ro và lợi nhuận, tuy nhiên ở các mức độ khác nhau.",
+"options": {
+"A": "Đúng",
+"B": "Sai",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 30,
+"question": "Các chứng khoán nào có mức sinh lời nằm trên đường thị trường chứng khoán cần bán đi, các chứng khoán nào có mức sinh lời nằm dưới đường thị trường chứng khoán cần mua vào.",
+"options": {
+"A": "Đúng",
+"B": "Sai",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "B"
+},
+{
+"id": 31,
+"question": "Bạn đầu tư 50% tiền của mình vào cổ phiếu A với hệ số beta = 1,6 và cổ phiếu B với hệ số beta = 0,7. Thì hệ số beta của danh mục đầu tư là:",
+"options": {
+"A": "1,4",
+"B": "1,15",
+"C": "0,36",
+"D": "Tất cả đều sai",
+"E": ""
+},
+"correct": "B"
+},
+{
+"id": 32,
+"question": "Cho 2 cổ phiếu A và B E(RA) = 15%, Phương sai A (δ2) = 20% E(RB) = 10%, Phương sai B (δ2) = 18% Cov (RA,RB) = 0,05 (hiệp phương sai) Nếu mức sinh lời kỳ vọng là 13%, tỷ trọng đầu tư vào mỗi cổ phiếu này là bao nhiêu? Xác định phương sai của danh mục đầu tư đó.",
+"options": {
+"A": "Tỷ trọng đầu tư vào cổ phiếu A là 60%. Tỷ trọng đầu tư vào cổ phiếu B là 40%. Phương sai của danh mục đầu tư là 0.124",
+"B": "",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 33,
+"question": "Mô hình định giá tài sản vốn (CAPM) E(Ri)= Rf + β[E(RM)-Rf] Cổ phiếu X có hệ số β so với thị trường là 1,5. Lãi suất phi rủi ro hiện là 6%/năm và lợi suất kỳ vọng của thị trường là 13%. Xác định mức sinh lời kỳ vọng của cổ phiếu X theo mô hình. Nếu nhà đầu tư A dự đoán cổ phiếu X sẽ đem lại mức sinh lời 15%/năm. Nhà đầu tư sẽ làm gì?",
+"options": {
+"A": "Mua cổ phiếu X",
+"B": "Bán cổ phiếu X",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "B"
+},
+{
+"id": 34,
+"question": "Hệ số Beta của danh mục: Một nhà đầu tư hiện đang nắm giữ 1 danh mục gồm 2 cổ phiếu X và Y. Giá trị vốn đầu tư vào X là 2 triệu USD. Beta của X so với thị trường lần lượt là 1,3 và 1,8. Hệ số beta của danh mục đầu tư này là bao nhiêu?",
+"options": {
+"A": "1,3",
+"B": "1,8",
+"C": "1,6",
+"D": "",
+"E": ""
+},
+"correct": "C"
+},
+{
+"id": 35,
+"question": "Lý thuyết định giá theo nguyên lý kinh doanh song hành APT Danh mục A là 1 danh mục đầu tư được đa dạng hóa tốt và chịu tác động của 2 yếu tố X và Y. Biết Rf = 5%, mức bù rủi ro của mỗi yếu tố X và Y lần lượt là 2% và 3,5%. Độ nhạy của mức sinh lời DMA đối với mỗi yếu tố X và Y tương ứng là 1,4 và 0,95. Xác định lợi nhuận kỳ vọng của danh mục A.",
+"options": {
+"A": "5%",
+"B": "11,125%",
+"C": "11,25%",
+"D": "",
+"E": ""
+},
+"correct": "C"
+},
+{
+"id": 36,
+"question": "Quản lý danh mục trái phiếu. 1 danh mục trái phiếu trị giá 10 triệu USD gồm 2 trái phiếu A và B với tỷ trọng đầu tư tương ứng là 70% và 30%. A và B đều là trái phiếu trả lãi định kỳ với thời gian đáo hạn bình quân lần lượt là 5 năm và 7 năm. Xác định thời gian đáo hạn bình quân của danh mục.",
+"options": {
+"A": "5 năm",
+"B": "7 năm",
+"C": "5,6 năm",
+"D": "",
+"E": ""
+},
+"correct": "C"
+},
+{
+"id": 37,
+"question": "Biến động giá trái phiếu. 1 danh mục trái phiếu có thời gian đáo hạn bình quân là 5 năm lãi suất đối với danh mục hiện nay là 8%/năm. Giá trị danh mục này sẽ thay đổi như thế nào nếu lãi suất thị trường tăng thêm 0,5%.",
+"options": {
+"A": "-2,31%",
+"B": "2,31%",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 38,
+"question": "Sử dụng chứng khoán phái sinh để quản lý rủi ro. Dử dụng hợp đồng tương lai chỉ số CP phòng ngừa giá biến động 1 nhà đầu tư có số vốn là 10 triệu USD, dự định đầu tư vào 1 danh mục cổ phiếu có hệ số beta so với chỉ số SP500 là 1,2 và 6 tháng nữa chỉ số SP hiện thời là 1070. Nhà đầu tư sử dụng hợp đồng tương lai chỉ số đáo hạn tháng 6/2010. Hợp đồng này đang ở mức 1075. Biết k=25usd/ điểm chỉ số. Nhà đầu tư sẽ mua /bán bao nhiêu hợp đồng?",
+"options": {
+"A": "Mua 446 hợp đồng tương lai chỉ số S&P 500",
+"B": "Bán 446 hợp đồng tương lai chỉ số S&P 500",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 39,
+"question": "Sử dụng HĐTL chỉ số để điều chỉnh β mức t Ví dụ 1 DMĐT trị giá 3 triệu USD có hệ số beta là 1,4 so với chỉ số SP500. 1 quản lý danh mục muốn giảm hệ số beta xuống còn 1,1. Sử dụng HĐTL chỉ số SP500 đang yết mức 1050, nhà đầu tư sẽ làm gì? k = 25usd/điểm.",
+"options": {
+"A": "Mua 34 hợp đồng",
+"B": "Bán 34 hợp đồng",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "B"
+},
+{
+"id": 40,
+"question": "Sử dụng hợp đồng tương lai lãi suất để phòng ngừa biến động giá.1 nhà đầu tư dự định dùng 1 triệu USD nhận được vào tháng 6 để đầu tư vài danh mục trái phiếu có thời gian đáo hạn bình quân điều chỉnh là 5. Giả sử hợp đồng tương lai TP chính phủ đáo hạn tháng 6 hiện được yết ở mức 111,5. TP rẻ nhất để giao theo HĐTL này có thời gian đáo hạn bình quân điều chỉnh là 5,5. Biết quy mô HĐTL là 100.000USD. Xác định số lượng hợp đồng nhà đầu tư sẽ mua/bán?",
+"options": {
+"A": "Mua 8 HĐTL trái phiếu chính phủ",
+"B": "Bán 8 HĐTL trái phiếu chính phủ",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 41,
+"question": "1 DMĐT có lợi suất ước tính là 20% và độ lệch chuẩn là 20%. Tín phiếu phi rủi ro có lãi suất là 7% và nhà đầu tư có mức ngại rủi ro A=4, sẽ thực hiện việc đầu tư không? Điều gì xảy ra nếu A=8?",
+"options": {
+"A": "Đầu tư với A=4, không đầu tư với A=8",
+"B": "Không đầu tư với A=4, đầu tư với A=8",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 42,
+"question": "Một trái phiếu có mệnh giá là 1000USD, thời gian đáo hạn là 3 năm, lãi suất đáo hạn là 6%/năm, lãi suất coupon là 7%/năm, trả lãi theo năm. Tính thời gian đáo hạn bình quân của trái phiếu đó.",
+"options": {
+"A": "2,81 năm",
+"B": "3 năm",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 43,
+"question": "Giả sử cấu trúc lãi suất là nằm ngang với mức lãi suất là 10%/năm. Bạn muốn thiết kế 1 DMĐT có kỳ đầu tư 2,5 năm gồm 2 loại trái phiếu sau: - Trái phiếu A có lãi suất coupon 8%/năm (trả lãi hàng năm), có thời gian đáo hạn 2 năm - Trái phiếu B có lãi suất coupon 12%/năm, thời gian đáo hạn 3 năm. Cả 2 loại TP trên đều có mệnh giá là 1000USD. Nếu bạn đầu tư 5 triệu USD vào DMĐT thì bạn mua mỗi loại là bao nhiêu để trung hòa rủi ro lãi suất.",
+"options": {
+"A": "WA = 0,26 và WB = 0,74",
+"B": "",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 44,
+"question": "Cổ phiếu A có giá 11.000đ và không thanh toán cổ tức. Người ta yêu cầu 100 nhà phân tích dự đoán giá CP A vào cuối năm kết quả như sau:
+Giá dự kiến (ki)Số nhà phân tích (Pi)10.5001011.5003012.50060
+Tính mức sinh lời kỳ vọng? Tính rủi ro?",
+"options": {
+"A": "k=9,07%, δ=6,08%",
+"B": "",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 45,
+"question": "Lợi nhuận mong đợi của chứng khoán thị trường RM là 16% và Rf=8%. Bạn đang xem xét 1 dự án (chứng khoán) có hệ số rủi roi hệ thống là beta=1. a/ Theo mô hình CAPM mức lợi nhuận đòi hỏi đối với dự án đó phải là bao nhiêu? b/ Nếu dự án đó có mức tỷ suất nội hoàn (IRR) dự kiến là 25% thì liệu dự án đó có thể chấp nhận đầu tư không, vì sao?",
+"options": {
+"A": "16%, 25% > 16% nên đầu tư",
+"B": "",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 46,
+"question": "Một DMĐT có tỷ lệ thu hồi mong đợi là 20 và δ= 20%. Các trái phiếu có mức tỷ lệ thu hồi chắc chắn là 7%. Những nhà đầu tư có mức nghi ngại rủi ro A=4 sẽ thực hiện đầu tư không? Điều gì xảy ra nếu A=8?",
+"options": {
+"A": "Nhà đầu tư ít sợ rủi ro (A=4) sẽ chấp nhận rót vốn vào danh mục này. Nhà đầu tư rất sợ rủi ro (A=8A) sẽ tránh danh mục rủi ro và chọn giữ trái phiếu phi rủi ro",
+"B": "",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 47,
+"question": "Hãy xem xét các loại chứng khoán A và B của 2 công ty có quan hệ ngược chiều nhau trước những biến động của thị trường sau đây là thông tin dự báo dùng để phân tích.
+Chỉ tiêuTăng trưởngỔn địnhKhủng hoảngDự tính0,20,60,2Cận của A35%20%-30%Cận của B5%0%50%
+Xác định: 1/ Các lợi nhuận dự kiến bình quân của A và B. 2/ Các độ rủi ro đầu tư vào mỗi chứng khoán trên. 3/ Tính tích sai 4/ Tính hệ số tương quan.",
+"options": {
+"A": "RA=13%, RB=11%, δA=22,2%, δB=19,6%, Cov=-4,08%, β=-0,93",
+"B": "",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 48,
+"question": "Thời gian đáo hạn bình quân điều chỉnh của danh mục là 7 năm, lãi suất yêu cầu là 12%/năm. Nếu lãi suất yêu cầu giảm xuống 11% thì danh mục nay thay đổi như thế nào về giá trị?",
+"options": {
+"A": "7%",
+"B": "-7%",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 49,
+"question": "1 danh mục cổ phiếu có hệ số tương quan là 0,85 so với số SML có δ = 22%. Nếu DMĐT được phòng ngừa rủi ro bằng HĐTL chỉ số SML theo phương pháp phương sai tối thiểu thì rủi ro còn lại của danh mục là bao nhiêu %?",
+"options": {
+"A": "11,59%",
+"B": "",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 50,
+"question": "Tỷ suất lợi nhuận gộp liên tục -7%, tỷ suất lợi nhuận đơn sẽ là bao nhiêu?",
+"options": {
+"A": "-6,7%",
+"B": "",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 51,
+"question": "1 nhà đầu tư dự tính đầu tư vào 2 trái phiếu A và B với giá trị đầu tư lần lượt là 1 triệu USD và 4 triệu USD trong thời hạn 5 năm cho TPA và 10 năm cho TPB. Xác định thời gian đáo hạn bình quân của danh mục.",
+"options": {
+"A": "9 năm",
+"B": "",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 52,
+"question": "Bạn đầu tư 50% tiền vào cổ phiếu A có hệ số beta = 1,6 và đầu tư phần tiền còn lại vào cổ phiếu B với beta= 0,7. Beta của danh mục này là:",
+"options": {
+"A": "1,4",
+"B": "1,15",
+"C": "0,36",
+"D": "1,08",
+"E": ""
+},
+"correct": "B"
+},
+{
+"id": 53,
+"question": "1 danh mục cổ phiếu có hệ số tương quan là 0,85 với chỉ số SMI, độ lệch chuẩn của danh mục đầu tư này là 22%. Nếu danh mục được phòng ngừa bằng HĐ tương lai chỉ số SMI theo phương pháp phương sai tối thiểu, rủi ro còn lại của danh mục là:",
+"options": {
+"A": "18,7",
+"B": "15,9",
+"C": "11,59",
+"D": "Không có câu nào đúng",
+"E": ""
+},
+"correct": "D"
+},
+{
+"id": 54,
+"question": "Coupon như nhau, trái phiếu có thời gian đáo hạn dài hơn có D lớn hơn:",
+"options": {
+"A": "Đúng",
+"B": "Sai",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 55,
+"question": "Trái phiếu có thời gian đáo hạn như nhau, C nhỏ hơn thì D lớn hơn:",
+"options": {
+"A": "Đúng",
+"B": "Sai",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "A"
+},
+{
+"id": 56,
+"question": "Mức ngại rủi ro của NĐT có thể âm",
+"options": {
+"A": "Đúng",
+"B": "Sai",
+"C": "",
+"D": "",
+"E": ""
+},
+"correct": "B"
+}
 ]
