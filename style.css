@@ -82,8 +82,11 @@ th, td {
 }
 /* Ảnh trong câu hỏi */
 #question img {
-    max-width: 90%;
-    height: auto;
     display: block;
-    margin: 14px auto;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    margin: 18px auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border-radius: 6px;
 }
