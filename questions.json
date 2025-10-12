@@ -48,7 +48,7 @@
     "correct": "B"
   },
   {
-"id": 1,
+"id": 101,
 "question": "Mức lợi nhuận phi rủi ro hiện là 7%. Mức sinh lời của một CP trên thị trường hiện là 15%. Biết rằng với hệ số beta là 1,3 mức sinh lời kỳ vọng tương ứng của CP này là 12% bạn sẽ:",
 "options": {
 "A": "Mua CP này vì nó bị định giá cao hơn giá trị thực",
@@ -60,7 +60,7 @@
 "correct": "B"
 },
 {
-"id": 2,
+"id": 102,
 "question": "Trong một danh mục đầu tư được đa dạng hóa tốt:",
 "options": {
 "A": "Rủi ro thị trường được coi như không đáng kể",
@@ -72,7 +72,7 @@
 "correct": "B"
 },
 {
-"id": 3,
+"id": 103,
 "question": "Mức sinh lời kỳ vọng của một CP có hệ số beta = 0 có nghĩa là:",
 "options": {
 "A": "Là lãi suất phi rủi ro",
@@ -563,20 +563,7 @@
 },
 "correct": "A"
 },
-{
-"id": 44,
-"question": "Cổ phiếu A có giá 11.000đ và không thanh toán cổ tức. Người ta yêu cầu 100 nhà phân tích dự đoán giá CP A vào cuối năm kết quả như sau:
-Giá dự kiến (ki)Số nhà phân tích (Pi)10.5001011.5003012.50060
-Tính mức sinh lời kỳ vọng? Tính rủi ro?",
-"options": {
-"A": "k=9,07%, δ=6,08%",
-"B": "",
-"C": "",
-"D": "",
-"E": ""
-},
-"correct": "A"
-},
+
 {
 "id": 45,
 "question": "Lợi nhuận mong đợi của chứng khoán thị trường RM là 16% và Rf=8%. Bạn đang xem xét 1 dự án (chứng khoán) có hệ số rủi roi hệ thống là beta=1. a/ Theo mô hình CAPM mức lợi nhuận đòi hỏi đối với dự án đó phải là bao nhiêu? b/ Nếu dự án đó có mức tỷ suất nội hoàn (IRR) dự kiến là 25% thì liệu dự án đó có thể chấp nhận đầu tư không, vì sao?",
@@ -601,20 +588,7 @@ Tính mức sinh lời kỳ vọng? Tính rủi ro?",
 },
 "correct": "A"
 },
-{
-"id": 47,
-"question": "Hãy xem xét các loại chứng khoán A và B của 2 công ty có quan hệ ngược chiều nhau trước những biến động của thị trường sau đây là thông tin dự báo dùng để phân tích.
-Chỉ tiêuTăng trưởngỔn địnhKhủng hoảngDự tính0,20,60,2Cận của A35%20%-30%Cận của B5%0%50%
-Xác định: 1/ Các lợi nhuận dự kiến bình quân của A và B. 2/ Các độ rủi ro đầu tư vào mỗi chứng khoán trên. 3/ Tính tích sai 4/ Tính hệ số tương quan.",
-"options": {
-"A": "RA=13%, RB=11%, δA=22,2%, δB=19,6%, Cov=-4,08%, β=-0,93",
-"B": "",
-"C": "",
-"D": "",
-"E": ""
-},
-"correct": "A"
-},
+
 {
 "id": 48,
 "question": "Thời gian đáo hạn bình quân điều chỉnh của danh mục là 7 năm, lãi suất yêu cầu là 12%/năm. Nếu lãi suất yêu cầu giảm xuống 11% thì danh mục nay thay đổi như thế nào về giá trị?",
