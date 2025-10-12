@@ -1,15 +1,5 @@
 [
-    {
-  "question": "Cho biết số lệnh của cổ phiếu <b>X</b> của công ty <b>B</b> với giá đóng cửa của ngày giao dịch trước liền kề là <b>20,5</b>; với khối lượng bên mua là khối lượng mua của các nhà đầu tư, còn khối lượng bên bán là khối lượng bán của công ty B. Hãy xác định số tiền công ty B nhận được khi lệnh được khớp:<br><img src=\"images/stock-b-company.png\" alt=\"Cổ phiếu X của công ty B\" width=\"300\">",
-  "answers": [
-    "A. 20.401.000 đồng",
-    "B. 20.500.000 đồng",
-    "C. 20.606.000 đồng",
-    "D. 22.665.000 đồng"
-  ],
-  "correct": 2
-    },
-    {
+        {
         "id": 1,
         "question": "Tổng giám đốc công ty chứng khoán phải đáp ứng các tiêu chuẩn sau đây:",
         "options": {
