@@ -1,92 +1,113 @@
-body {
-    font-family: Arial, sans-serif;
-    background: #f6f8fa;
-    margin: 0;
-    padding: 0;
+/* style.css - layout cơ bản + highlight đúng/sai */
+:root{
+  --correct-bg: #d4edda;
+  --correct-border: #28a745;
+  --correct-color: #155724;
+
+  --incorrect-bg: #f8d7da;
+  --incorrect-border: #dc3545;
+  --incorrect-color: #721c24;
 }
-.container {
-    background: #fff;
-    max-width: 800px;
-    margin: 40px auto 0 auto;
-    border-radius: 8px;
-    box-shadow: 0 0 12px #bbb;
-    padding: 32px;
+
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: #f5f7fb;
+  margin: 0;
+  padding: 20px;
 }
-h1 {
-    text-align: center;
-    color: #205081;
-    margin-bottom: 32px;
+
+.container{
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.08);
+  padding: 28px;
 }
-#question {
-    font-size: 1.2em;
-    margin-bottom: 18px;
+
+h1{
+  margin: 0 0 18px 0;
+  color: #1f2937;
+  text-align: center;
 }
-#answers {
-    margin-bottom: 20px;
+
+#question-header{
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: #0f172a;
 }
-.answer-option {
-    display: block;
-    margin-bottom: 12px;
-    padding: 10px 14px;
-    border-radius: 6px;
-    border: 1px solid #e0e0e0;
-    background: #f9f9f9;
-    transition: background 0.2s, border 0.2s;
-    cursor: pointer;
+
+#question{
+  font-size: 1.05rem;
+  color: #0b1220;
+  margin-bottom: 14px;
 }
-.answer-option.selected,
-.answer-option:hover {
-    background: #e5f2ff;
-    border: 1px solid #1d72b8;
+
+#answers{
+  margin-bottom: 12px;
 }
-#controls {
-    text-align: center;
-    margin-bottom: 18px;
+
+/* mỗi tùy chọn đáp án là một block */
+.answer-option{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #e6edf3;
+  background: #fbfdff;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, transform 0.06s;
+  user-select: none;
 }
-#controls button {
-    margin: 0 8px;
-    padding: 8px 18px;
-    font-size: 1em;
-    border-radius: 4px;
-    border: 1px solid #1d72b8;
-    background: #fff;
-    color: #1d72b8;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+.answer-option:hover{
+  transform: translateY(-1px);
+  border-color: #cfe8ff;
 }
-#controls button:hover {
-    background: #1d72b8;
-    color: #fff;
+
+.answer-option input[type="radio"]{
+  width: 18px;
+  height: 18px;
+  accent-color: #1d4ed8;
 }
-#result {
-    text-align: center;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #28a745;
-    margin-top: 8px;
+
+/* trạng thái đã chọn đúng / sai */
+.answer-option.correct{
+  background: var(--correct-bg);
+  border-color: var(--correct-border);
+  color: var(--correct-color);
 }
-/* Style cho bảng trong câu hỏi */
-table {
-    border-collapse: collapse;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 100%;
+.answer-option.incorrect{
+  background: var(--incorrect-bg);
+  border-color: var(--incorrect-border);
+  color: var(--incorrect-color);
 }
-table, th, td {
-    border: 1px solid #444;
+
+/* explanation box */
+#explanation{
+  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #fffbe6;
+  border: 1px solid #ffecb5;
+  color: #92400e;
+  display: none; /* chỉ hiển thị khi có nội dung */
 }
-th, td {
-    padding: 8px 12px;
-    text-align: center;
-    background: #f4faff;
+
+/* responsive cho bảng trong question */
+.table-responsive{
+  overflow-x: auto;
+  margin: 10px 0;
 }
-/* Ảnh trong câu hỏi */
-#question img {
-    display: block;
-    max-width: 100%;
-    width: 100%;
-    height: auto;
-    margin: 18px auto;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    border-radius: 6px;
+
+.table-responsive table{
+  width: 100%;
+  border-collapse: collapse;
+}
+.table-responsive th,
+.table-responsive td{
+  border: 1px solid #d1d5db;
+  padding: 8px;
+  text-align: center;
 }
