@@ -1,41 +1,91 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Trắc nghiệm chuyên môn</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- DOMPurify để sanitize HTML trước khi gán innerHTML -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ôn tập - Trắc nghiệm chuyên môn</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- DOMPurify để sanitize HTML -->
   <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
-  <!-- MathJax để render LaTeX -->
+  <!-- MathJax -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
   <div class="container">
-    <h1>Ôn tập - Quản lý quỹ</h1>
+    <header class="topbar">
+      <h1>Ôn tập - Quản lý quỹ</h1>
+    </header>
 
-    <div id="question-area">
-      <div id="question-header">
-        <span id="q-index"></span>
-        <span id="q-title"></span>
-      </div>
+    <main class="main-grid">
+      <!-- Left: question area -->
+      <section class="panel panel-question">
+        <!-- Exam settings / control -->
+        <div id="exam-setup" class="exam-setup">
+          <label>Số câu (1 - tổng): 
+            <input id="num-questions" type="number" min="1" value="10" />
+          </label>
+          <label>Thời gian (phút):
+            <input id="exam-minutes" type="number" min="1" value="30" />
+          </label>
+          <label><input id="randomize" type="checkbox" /> Chọn ngẫu nhiên</label>
+          <button id="start-exam-btn" class="btn">Bắt đầu làm bài</button>
+        </div>
 
-      <div id="question"></div>
+        <!-- Timer and controls when exam started -->
+        <div id="exam-controls" class="exam-controls" hidden>
+          <div class="timer">
+            <span>Thời gian còn lại:</span> <span id="timer-display">00:00</span>
+          </div>
+          <div class="control-buttons">
+            <button id="end-exam-btn" class="btn danger">Kết thúc bài (nộp)</button>
+            <button id="reset-answer-btn" class="btn">Đặt lại câu hiện tại</button>
+            <button id="flag-btn" class="btn">Cờ/Đánh dấu</button>
+          </div>
+        </div>
 
-      <div id="answers" role="list"></div>
+        <!-- Question content -->
+        <div id="question-wrapper" class="question-wrapper" aria-live="polite">
+          <div id="q-header" class="q-header">
+            <span id="q-index"></span>
+            <span id="q-title"></span>
+          </div>
 
-      <div id="explanation" aria-live="polite"></div>
-    </div>
+          <div id="question" class="question"></div>
 
-    <div id="controls">
-      <button id="prev-btn">Trước</button>
-      <button id="next-btn">Sau</button>
-      <button id="reset-btn">Đặt lại câu</button>
-    </div>
+          <div id="answers" class="answers" role="list"></div>
 
-    <div id="status"></div>
+          <div id="explanation" class="explanation" aria-live="polite"></div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+          <button id="prev-btn" class="btn" disabled>Trước</button>
+          <button id="next-btn" class="btn" disabled>Sau</button>
+        </div>
+
+        <!-- Result box (shows after exam end) -->
+        <div id="result-box" class="result-box" hidden>
+          <h2>Kết quả</h2>
+          <p id="score-summary"></p>
+          <p id="pass-msg"></p>
+          <button id="review-btn" class="btn">Xem lại câu hỏi</button>
+        </div>
+      </section>
+
+      <!-- Right: question grid (compact) -->
+      <aside class="panel panel-grid">
+        <div class="grid-header">
+          <strong>Danh sách câu</strong>
+        </div>
+        <div id="question-grid" class="question-grid" aria-label="Danh sách câu hỏi"></div>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <small>Ứng dụng ôn tập - tradetolive</small>
+    </footer>
   </div>
 
   <script src="script.js"></script>
