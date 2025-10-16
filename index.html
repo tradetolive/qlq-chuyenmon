@@ -1,28 +1,43 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Trắc nghiệm chuyên môn</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- MathJax để hiển thị công thức toán học -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Trắc nghiệm chuyên môn</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- DOMPurify để sanitize HTML trước khi gán innerHTML -->
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
+  <!-- MathJax để render LaTeX -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Trắc nghiệm chuyên môn</h1>
-        <div id="question-area">
-            <div id="question"></div>
-            <div id="answers"></div>
-        </div>
-        <div id="controls">
-            <button id="prev-btn">Trước</button>
-            <button id="next-btn">Sau</button>
-            <button id="submit-btn">Nộp bài</button>
-        </div>
-        <div id="result"></div>
+  <div class="container">
+    <h1>Ôn tập - Quản lý quỹ</h1>
+
+    <div id="question-area">
+      <div id="question-header">
+        <span id="q-index"></span>
+        <span id="q-title"></span>
+      </div>
+
+      <div id="question"></div>
+
+      <div id="answers" role="list"></div>
+
+      <div id="explanation" aria-live="polite"></div>
     </div>
-    <script src="script.js"></script>
+
+    <div id="controls">
+      <button id="prev-btn">Trước</button>
+      <button id="next-btn">Sau</button>
+      <button id="reset-btn">Đặt lại câu</button>
+    </div>
+
+    <div id="status"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
