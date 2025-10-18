@@ -82,6 +82,7 @@ function startExam(){
   el('exam-setup').hidden = true;
   el('score-history').hidden = true;
   el('exam-controls').hidden = false;
+  el('review-controls').hidden = true;
   el('start-exam-btn').disabled = true;
   el('prev-btn').disabled = false;
   el('next-btn').disabled = false;
@@ -179,7 +180,7 @@ function showQuestion(idx){
     radio.value = key;
     radio.id = `q${q.id}-opt-${key}`;
     if(userAnswers[q.id] === key) radio.checked = true;
-    radio.disabled = examEnded; // Disable radio buttons if exam ended
+    radio.disabled = examEnded;
 
     const label = document.createElement('label');
     label.htmlFor = radio.id;
@@ -204,7 +205,7 @@ function showQuestion(idx){
     answersDiv.appendChild(opt);
   });
 
-  // show explanation if already answered
+  // show explanation if already answered or in review mode
   if(userAnswers[q.id] || examEnded){
     revealAnswerVisual(q, userAnswers[q.id]);
   } else {
@@ -212,6 +213,9 @@ function showQuestion(idx){
     const opts = answersDiv.querySelectorAll('.answer-option');
     opts.forEach(div => div.classList.remove('correct','incorrect'));
   }
+
+  // show restart button in review mode
+  el('review-controls').hidden = !examEnded;
 
   updateGridStatus();
   scrollGridTo(currentIndex);
@@ -284,10 +288,10 @@ function resetCurrentAnswer(){
 }
 
 // Save score to localStorage
-function saveScore(correctCount, total, pct){
+function saveScore(correctCount, total, pct, evaluation){
   const scores = JSON.parse(localStorage.getItem('quizScores') || '[]');
   const timestamp = new Date().toLocaleString('vi-VN');
-  scores.push({ correctCount, total, pct, timestamp });
+  scores.push({ correctCount, total, pct, evaluation, timestamp });
   localStorage.setItem('quizScores', JSON.stringify(scores));
 }
 
@@ -302,7 +306,7 @@ function displayScoreHistory(){
   }
   scores.forEach(score => {
     const li = document.createElement('li');
-    li.textContent = `${score.timestamp}: ${score.correctCount}/${score.total} (${score.pct.toFixed(2)}%)`;
+    li.textContent = `${score.timestamp}: ${score.correctCount}/${score.total} (${score.pct.toFixed(2)}%) - ${score.evaluation}`;
     scoreList.appendChild(li);
   });
 }
@@ -330,8 +334,31 @@ function endExam(reason='manual'){
   const total = examQuestions.length;
   const pct = total ? Math.round((correctCount / total) * 10000) / 100 : 0;
 
+  // determine evaluation
+  let evaluation = '';
+  let evaluationClass = '';
+  if(pct < 50){
+    evaluation = 'Chưa đạt';
+    evaluationClass = 'fail';
+  } else if(pct <= 60){
+    evaluation = 'Trung bình';
+    evaluationClass = 'average';
+  } else if(pct <= 70){
+    evaluation = 'Trung bình khá';
+    evaluationClass = 'average-good';
+  } else if(pct <= 80){
+    evaluation = 'Khá';
+    evaluationClass = 'good';
+  } else if(pct <= 90){
+    evaluation = 'Khá giỏi';
+    evaluationClass = 'very-good';
+  } else {
+    evaluation = 'Giỏi';
+    evaluationClass = 'excellent';
+  }
+
   // save score
-  saveScore(correctCount, total, pct);
+  saveScore(correctCount, total, pct, evaluation);
 
   // show results
   el('result-box').hidden = false;
@@ -339,7 +366,8 @@ function endExam(reason='manual'){
   el('question-wrapper').hidden = true;
   el('nav-buttons').hidden = true;
   el('score-summary').textContent = `Bạn đúng ${correctCount}/${total} câu (${pct}%).`;
-  el('pass-msg').textContent = pct > 50 ? 'CHÚC MỪNG — Bạn đã đạt (>=50%)' : 'Bạn chưa đạt (dưới 50%).';
+  el('pass-msg').textContent = evaluation;
+  el('pass-msg').className = evaluationClass;
 
   // show detailed results
   const resultDetails = el('result-details');
@@ -377,6 +405,7 @@ function restartQuiz(){
   el('exam-setup').hidden = false;
   el('score-history').hidden = false;
   el('exam-controls').hidden = true;
+  el('review-controls').hidden = true;
   el('question-wrapper').hidden = false;
   el('nav-buttons').hidden = false;
   el('start-exam-btn').disabled = false;
@@ -405,6 +434,7 @@ function attachHandlers(){
     if(currentIndex < examQuestions.length - 1) showQuestion(currentIndex + 1);
   });
   el('restart-btn').addEventListener('click', restartQuiz);
+  el('restart-from-review-btn').addEventListener('click', restartQuiz);
   el('review-btn').addEventListener('click', ()=>{
     el('result-box').hidden = true;
     el('exam-controls').hidden = true;
