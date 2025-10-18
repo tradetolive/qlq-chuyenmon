@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ôn tập - Trắc nghiệm chuyên môn</title>
   <link rel="stylesheet" href="style.css" />
   <!-- DOMPurify để sanitize HTML -->
@@ -31,6 +31,13 @@
           </label>
           <label><input id="randomize" type="checkbox" /> Chọn ngẫu nhiên</label>
           <button id="start-exam-btn" class="btn">Bắt đầu làm bài</button>
+        </div>
+
+        <!-- Score history -->
+        <div id="score-history" class="score-history">
+          <h2>Lịch sử điểm số</h2>
+          <ul id="score-list"></ul>
+          <button id="clear-scores-btn" class="btn">Xóa lịch sử</button>
         </div>
 
         <!-- Timer and controls when exam started -->
@@ -70,8 +77,10 @@
           <h2>Kết quả</h2>
           <p id="score-summary"></p>
           <p id="pass-msg"></p>
+          <h3>Chi tiết đáp án</h3>
+          <div id="result-details"></div>
+          <button id="restart-btn" class="btn">Làm lại</button>
           <button id="review-btn" class="btn">Xem lại câu hỏi</button>
-          <button id="review-btn" class="btn">Làm lại</button>
         </div>
       </section>
 
