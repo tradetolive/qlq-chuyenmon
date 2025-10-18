@@ -23,6 +23,7 @@ async function loadAllQuestions(){
     el('num-questions').max = allQuestions.length;
     if(parseInt(el('num-questions').value) > allQuestions.length) el('num-questions').value = Math.min(10, allQuestions.length);
     buildGridPlaceholder(allQuestions.length);
+    displayScoreHistory();
   }catch(err){
     console.error(err);
     el('question').textContent = 'Lỗi khi tải câu hỏi: ' + err.message;
@@ -49,7 +50,6 @@ function buildGridPlaceholder(n){
     cell.textContent = i+1;
     cell.addEventListener('click', ()=> {
       if(!examQuestions.length) return;
-      // navigate
       goToQuestion(i);
     });
     grid.appendChild(cell);
@@ -64,7 +64,6 @@ function startExam(){
 
   // choose questions
   if(randomize){
-    // shuffle and take n
     const shuffled = [...allQuestions].sort(()=>Math.random()-0.5);
     examQuestions = shuffled.slice(0,n);
   } else {
@@ -81,12 +80,13 @@ function startExam(){
 
   // update UI
   el('exam-setup').hidden = true;
+  el('score-history').hidden = true;
   el('exam-controls').hidden = false;
   el('start-exam-btn').disabled = true;
   el('prev-btn').disabled = false;
   el('next-btn').disabled = false;
   el('result-box').hidden = true;
-  renderQuestionGrid(); // grid built for examQuestions length
+  renderQuestionGrid();
   showQuestion(0);
 
   // start timer
@@ -121,7 +121,6 @@ function renderQuestionGrid(){
   const grid = el('question-grid');
   grid.innerHTML = '';
   for(let i=0;i<examQuestions.length;i++){
-    const q = examQuestions[i];
     const cell = document.createElement('button');
     cell.className = 'qcell unanswered';
     cell.type = 'button';
@@ -146,7 +145,6 @@ function updateGridStatus(){
     } else if(userAnswers[id] === undefined){
       cell.classList.add('unanswered');
     } else {
-      // check correctness
       const selected = userAnswers[id];
       const correct = (q.correct || '').toString();
       if(selected === correct) cell.classList.add('answered');
@@ -157,7 +155,7 @@ function updateGridStatus(){
 
 // show particular question index (in examQuestions)
 function showQuestion(idx){
-  if(!examStarted || !examQuestions.length) return;
+  if(!examQuestions.length) return;
   currentIndex = Math.max(0, Math.min(idx, examQuestions.length - 1));
   const q = examQuestions[currentIndex];
   el('q-index').textContent = `Câu ${currentIndex+1} / ${examQuestions.length}`;
@@ -180,24 +178,20 @@ function showQuestion(idx){
     radio.name = 'answer';
     radio.value = key;
     radio.id = `q${q.id}-opt-${key}`;
-
-    // mark previously selected
     if(userAnswers[q.id] === key) radio.checked = true;
+    radio.disabled = examEnded; // Disable radio buttons if exam ended
 
     const label = document.createElement('label');
     label.htmlFor = radio.id;
     label.innerHTML = sanitizeHTML(`<strong>${key}.</strong> ${text}`);
 
-    // click handler: allow change while exam not ended
     opt.addEventListener('click', (ev)=>{
       if(examEnded) return;
       userAnswers[q.id] = key;
-      // show immediate feedback and explanation
       revealAnswerVisual(q, key);
       updateGridStatus();
     });
 
-    // also radio change
     radio.addEventListener('change', ()=>{
       if(examEnded) return;
       userAnswers[q.id] = radio.value;
@@ -211,20 +205,17 @@ function showQuestion(idx){
   });
 
   // show explanation if already answered
-  if(userAnswers[q.id]){
+  if(userAnswers[q.id] || examEnded){
     revealAnswerVisual(q, userAnswers[q.id]);
   } else {
     hideExplanation();
-    // remove styles
     const opts = answersDiv.querySelectorAll('.answer-option');
     opts.forEach(div => div.classList.remove('correct','incorrect'));
   }
 
   updateGridStatus();
-  // scroll grid to visible cell (for mobile)
   scrollGridTo(currentIndex);
 
-  // MathJax render
   if(window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
 }
 
@@ -250,7 +241,6 @@ function revealAnswerVisual(q, selectedKey){
   const explanationHtml = q.explanation ? q.explanation : '<em>Không có lời giải chi tiết.</em>';
   explBox.innerHTML = sanitizeHTML(explanationHtml);
   explBox.style.display = 'block';
-  // MathJax for explanation
   if(window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
 }
 
@@ -263,7 +253,7 @@ function hideExplanation(){
 
 // navigate functions
 function goToQuestion(idx){
-  if(!examStarted) return;
+  if(!examStarted && !examEnded) return;
   showQuestion(idx);
 }
 
@@ -272,7 +262,6 @@ function scrollGridTo(idx){
   const grid = el('question-grid');
   const cell = grid.querySelector(`button[data-index="${idx}"]`);
   if(!cell) return;
-  // use scrollIntoView with nearest behavior
   cell.scrollIntoView({behavior:'smooth', block:'nearest', inline:'nearest'});
 }
 
@@ -290,9 +279,38 @@ function resetCurrentAnswer(){
   const q = examQuestions[currentIndex];
   delete userAnswers[q.id];
   hideExplanation();
-  // re-render question to remove styling
   showQuestion(currentIndex);
   updateGridStatus();
+}
+
+// Save score to localStorage
+function saveScore(correctCount, total, pct){
+  const scores = JSON.parse(localStorage.getItem('quizScores') || '[]');
+  const timestamp = new Date().toLocaleString('vi-VN');
+  scores.push({ correctCount, total, pct, timestamp });
+  localStorage.setItem('quizScores', JSON.stringify(scores));
+}
+
+// Display score history
+function displayScoreHistory(){
+  const scoreList = el('score-list');
+  const scores = JSON.parse(localStorage.getItem('quizScores') || '[]');
+  scoreList.innerHTML = '';
+  if(scores.length === 0){
+    scoreList.innerHTML = '<li>Chưa có lịch sử điểm số.</li>';
+    return;
+  }
+  scores.forEach(score => {
+    const li = document.createElement('li');
+    li.textContent = `${score.timestamp}: ${score.correctCount}/${score.total} (${score.pct.toFixed(2)}%)`;
+    scoreList.appendChild(li);
+  });
+}
+
+// Clear score history
+function clearScoreHistory(){
+  localStorage.removeItem('quizScores');
+  displayScoreHistory();
 }
 
 // endExam: reason 'manual' or 'timeup'
@@ -301,7 +319,6 @@ function endExam(reason='manual'){
   examEnded = true;
   stopTimer();
 
-  // disable inputs visually by re-rendering and disabling click handlers via guard
   // compute score
   let correctCount = 0;
   for(const q of examQuestions){
@@ -311,20 +328,66 @@ function endExam(reason='manual'){
     if(selected && selected === correct) correctCount++;
   }
   const total = examQuestions.length;
-  const pct = total ? Math.round((correctCount / total) * 10000) / 100 : 0; // 2 decimals
+  const pct = total ? Math.round((correctCount / total) * 10000) / 100 : 0;
+
+  // save score
+  saveScore(correctCount, total, pct);
+
   // show results
   el('result-box').hidden = false;
+  el('exam-controls').hidden = true;
+  el('question-wrapper').hidden = true;
+  el('nav-buttons').hidden = true;
   el('score-summary').textContent = `Bạn đúng ${correctCount}/${total} câu (${pct}%).`;
   el('pass-msg').textContent = pct > 50 ? 'CHÚC MỪNG — Bạn đã đạt (>=50%)' : 'Bạn chưa đạt (dưới 50%).';
 
-  // update grid (final color states)
+  // show detailed results
+  const resultDetails = el('result-details');
+  resultDetails.innerHTML = '';
+  examQuestions.forEach((q, idx) => {
+    const selected = userAnswers[q.id];
+    const correct = q.correct || '';
+    const isCorrect = selected && selected === correct;
+    const div = document.createElement('div');
+    div.className = `question-review ${isCorrect ? 'correct' : selected ? 'incorrect' : 'unanswered'}`;
+    div.innerHTML = sanitizeHTML(`
+      <p><strong>Câu ${idx + 1}:</strong> ${q.question}</p>
+      <p><strong>Đáp án của bạn:</strong> ${selected ? `${selected}. ${q.options[selected] || 'Không có'}` : 'Chưa trả lời'}</p>
+      <p><strong>Đáp án đúng:</strong> ${correct}. ${q.options[correct] || 'Không có'}</p>
+      <p><strong>Lời giải:</strong> ${q.explanation || '<em>Không có lời giải chi tiết.</em>'}</p>
+    `);
+    resultDetails.appendChild(div);
+  });
+
   updateGridStatus();
-
-  // highlight all correct answers as green, but keep incorrect red for selected wrong ones
-  // For each question, update the UI if user navigates there - also disable further changing due to examEnded guard
-
-  // optionally scroll to top
   window.scrollTo({top:0, behavior:'smooth'});
+  if(window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
+}
+
+// Reset quiz to initial state
+function restartQuiz(){
+  examQuestions = [];
+  userAnswers = {};
+  flagged = {};
+  currentIndex = 0;
+  examStarted = false;
+  examEnded = false;
+  timeLeftSec = 0;
+  stopTimer();
+  el('exam-setup').hidden = false;
+  el('score-history').hidden = false;
+  el('exam-controls').hidden = true;
+  el('question-wrapper').hidden = false;
+  el('nav-buttons').hidden = false;
+  el('start-exam-btn').disabled = false;
+  el('prev-btn').disabled = true;
+  el('next-btn').disabled = true;
+  el('result-box').hidden = true;
+  el('question').innerHTML = '';
+  el('answers').innerHTML = '';
+  hideExplanation();
+  buildGridPlaceholder(allQuestions.length);
+  displayScoreHistory();
 }
 
 // attach event listeners
@@ -334,45 +397,24 @@ function attachHandlers(){
   el('flag-btn').addEventListener('click', toggleFlag);
   el('reset-answer-btn').addEventListener('click', resetCurrentAnswer);
   el('prev-btn').addEventListener('click', ()=>{
-    if(!examStarted) return;
+    if(!examStarted && !examEnded) return;
     if(currentIndex > 0) showQuestion(currentIndex - 1);
   });
   el('next-btn').addEventListener('click', ()=>{
-    if(!examStarted) return;
+    if(!examStarted && !examEnded) return;
     if(currentIndex < examQuestions.length - 1) showQuestion(currentIndex + 1);
   });
-  el('review-btn')?.addEventListener('click', ()=>{
-    // when reviewing after exam end, jump to first question
-    if(examQuestions.length) showQuestion(0);
+  el('restart-btn').addEventListener('click', restartQuiz);
+  el('review-btn').addEventListener('click', ()=>{
     el('result-box').hidden = true;
+    el('exam-controls').hidden = true;
+    el('question-wrapper').hidden = false;
+    el('nav-buttons').hidden = false;
+    showQuestion(0);
   });
+  el('clear-scores-btn').addEventListener('click', clearScoreHistory);
 }
-//Làm lại
-function restartQuiz() {
-    console.log('Restarting quiz...');
-    currentQuestionIndex = 0;
-    score = 0;
-    selectedOption = null;
-    selectedQuestions = [];
-    userAnswers = [];
-    clearInterval(timerId);
-    const scoreValueElement = document.getElementById('score-value');
-    if (scoreValueElement) {
-        scoreValueElement.textContent = `0/0`;
-        console.log('Score reset in restartQuiz to:', scoreValueElement.textContent);
-    }
-    const quizHeader = document.querySelector('.quiz-header');
-    if (quizHeader) quizHeader.style.display = 'none';
-    document.getElementById('quiz').style.display = 'none';
-    document.getElementById('result').style.display = 'none';
-    document.getElementById('start-screen').style.display = 'block';
-    const pastScores = document.getElementById('past-scores');
-    if (pastScores) pastScores.style.display = 'block';
-    const clearScoresBtn = document.getElementById('clear-scores-btn');
-    if (clearScoresBtn) clearScoresBtn.style.display = 'block';
-    updateNumQuestionsOptions();
-    displayPastScores();
-}
+
 // initialize
 window.addEventListener('load', async ()=>{
   attachHandlers();
