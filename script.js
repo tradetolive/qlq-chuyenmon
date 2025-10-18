@@ -1,4 +1,4 @@
-// script.js - exam mode with timer, question grid, instant feedback, scoring
+// script.js - exam mode with timer, question grid, instant feedback, scoring, accordion for results
 // Assumes questions.json present in same folder and each object: id, question, options, correct, explanation
 
 let allQuestions = [];
@@ -317,6 +317,27 @@ function clearScoreHistory(){
   displayScoreHistory();
 }
 
+// Toggle accordion item
+function toggleAccordion(event){
+  const header = event.currentTarget;
+  const content = header.nextElementSibling;
+  const isActive = header.classList.contains('active');
+
+  // Close all other accordion items
+  document.querySelectorAll('.accordion-header').forEach(h => {
+    h.classList.remove('active');
+    h.nextElementSibling.style.maxHeight = null;
+    h.nextElementSibling.classList.remove('active');
+  });
+
+  // Toggle current item
+  if(!isActive){
+    header.classList.add('active');
+    content.classList.add('active');
+    content.style.maxHeight = content.scrollHeight + 'px';
+  }
+}
+
 // endExam: reason 'manual' or 'timeup'
 function endExam(reason='manual'){
   if(!examStarted || examEnded) return;
@@ -369,7 +390,7 @@ function endExam(reason='manual'){
   el('pass-msg').textContent = evaluation;
   el('pass-msg').className = evaluationClass;
 
-  // show detailed results
+  // show detailed results as accordion
   const resultDetails = el('result-details');
   resultDetails.innerHTML = '';
   examQuestions.forEach((q, idx) => {
@@ -377,14 +398,24 @@ function endExam(reason='manual'){
     const correct = q.correct || '';
     const isCorrect = selected && selected === correct;
     const div = document.createElement('div');
-    div.className = `question-review ${isCorrect ? 'correct' : selected ? 'incorrect' : 'unanswered'}`;
+    div.className = `accordion-item`;
     div.innerHTML = sanitizeHTML(`
-      <p><strong>Câu ${idx + 1}:</strong> ${q.question}</p>
-      <p><strong>Đáp án của bạn:</strong> ${selected ? `${selected}. ${q.options[selected] || 'Không có'}` : 'Chưa trả lời'}</p>
-      <p><strong>Đáp án đúng:</strong> ${correct}. ${q.options[correct] || 'Không có'}</p>
-      <p><strong>Lời giải:</strong> ${q.explanation || '<em>Không có lời giải chi tiết.</em>'}</p>
+      <div class="accordion-header ${isCorrect ? 'correct' : selected ? 'incorrect' : 'unanswered'}">
+        <span>Câu ${idx + 1}: ${isCorrect ? 'Đúng' : selected ? 'Sai' : 'Chưa trả lời'}</span>
+      </div>
+      <div class="accordion-content">
+        <p><strong>Câu hỏi:</strong> ${q.question}</p>
+        <p><strong>Đáp án của bạn:</strong> ${selected ? `${selected}. ${q.options[selected] || 'Không có'}` : 'Chưa trả lời'}</p>
+        <p><strong>Đáp án đúng:</strong> ${correct}. ${q.options[correct] || 'Không có'}</p>
+        <p><strong>Lời giải:</strong> ${q.explanation || '<em>Không có lời giải chi tiết.</em>'}</p>
+      </div>
     `);
     resultDetails.appendChild(div);
+  });
+
+  // Attach accordion toggle event listeners
+  document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', toggleAccordion);
   });
 
   updateGridStatus();
