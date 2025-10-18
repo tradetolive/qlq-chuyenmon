@@ -15,7 +15,7 @@
 <body>
   <div class="container">
     <header class="topbar">
-      <h1>Ôn tập - Quản lý quỹ - phần chuyên môn</h1>
+      <h1>Ôn tập - Quản lý quỹ - phần chuyên môn/h1>
     </header>
 
     <main class="main-grid">
@@ -65,7 +65,10 @@
 
           <div id="explanation" class="explanation" aria-live="polite"></div>
 
- 
+          <!-- Restart button in review mode -->
+          <div id="review-controls" class="review-controls" hidden>
+            <button id="restart-from-review-btn" class="btn">Làm lại</button>
+          </div>
         </div>
 
         <!-- Navigation -->
@@ -80,7 +83,8 @@
           <p id="score-summary"></p>
           <p id="pass-msg"></p>
           <h3>Chi tiết đáp án</h3>
-          <div id="result-details" class="accordion"></div>
+          <div id="result-details"></div>
+          <button id="restart-btn" class="btn">Làm lại</button>
           <button id="review-btn" class="btn">Xem lại câu hỏi</button>
         </div>
       </section>
