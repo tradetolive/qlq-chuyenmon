@@ -442,7 +442,7 @@ function restartQuiz(){
   el('start-exam-btn').disabled = false;
   el('prev-btn').disabled = true;
   el('next-btn').disabled = true;
-  el('result-box').hidden = true;
+  el('result-box').hidden = false;
   el('question').innerHTML = '';
   el('answers').innerHTML = '';
   hideExplanation();
