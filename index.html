@@ -29,7 +29,7 @@
           <label>Thời gian (phút):
             <input id="exam-minutes" type="number" min="1" value="30" />
           </label>
-          <label><input id="randomize" type="checkbox" /> Chọn ngẫu nhiên</label>
+          <label><input id="randomize" type="checkbox" checked /> Chọn ngẫu nhiên</label>
           <button id="start-exam-btn" class="btn">Bắt đầu làm bài</button>
         </div>
 
@@ -64,6 +64,11 @@
           <div id="answers" class="answers" role="list"></div>
 
           <div id="explanation" class="explanation" aria-live="polite"></div>
+
+          <!-- Restart button in review mode -->
+          <div id="review-controls" class="review-controls" hidden>
+            <button id="restart-from-review-btn" class="btn">Làm lại</button>
+          </div>
         </div>
 
         <!-- Navigation -->
