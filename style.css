@@ -1,16 +1,21 @@
 /* style.css - cải tiến giao diện cho trắc nghiệm chuyên môn */
 :root {
-  --bg: #f8fafc; /* Màu nền dịu hơn */
+  --bg: #f8fafc;
   --panel-bg: #ffffff;
-  --accent: #2563eb; /* Xanh dương đậm hơn */
-  --success: #22c55e; /* Xanh lá tươi sáng */
-  --danger: #ef4444; /* Đỏ nổi bật */
-  --warn: #f59e0b; /* Vàng cảnh báo */
-  --muted: #6b7280; /* Xám dịu */
-  --text: #1e293b; /* Màu chữ đậm hơn */
-  --grid-size: 48px; /* Tăng kích thước grid cho dễ bấm */
+  --accent: #2563eb;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --warn: #f59e0b;
+  --muted: #6b7280;
+  --text: #1e293b;
+  --grid-size: 48px;
   --border-radius: 10px;
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --pass-middle: #3b82f6; /* Trung bình */
+  --pass-middle-good: #10b981; /* Trung bình khá */
+  --pass-good: #059669; /* Khá */
+  --pass-very-good: #047857; /* Khá giỏi */
+  --pass-excellent: #065f46; /* Giỏi */
 }
 
 * {
@@ -27,7 +32,7 @@ body {
 
 /* container */
 .container {
-  max-width: 1200px; /* Tăng chiều rộng tối đa */
+  max-width: 1200px;
   margin: 24px auto;
   padding: 20px;
 }
@@ -51,7 +56,7 @@ body {
 /* main grid */
 .main-grid {
   display: grid;
-  grid-template-columns: 1fr 220px; /* Tăng chiều rộng grid câu hỏi */
+  grid-template-columns: 1fr 220px;
   gap: 20px;
 }
 
@@ -156,6 +161,14 @@ body {
   border-radius: 8px;
 }
 
+/* review controls */
+.review-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+
 /* question content */
 .q-header {
   font-weight: 700;
@@ -246,6 +259,34 @@ body {
 .result-box p {
   font-size: 1.05rem;
   margin-bottom: 8px;
+}
+
+#pass-msg {
+  font-weight: 600;
+}
+
+#pass-msg.fail {
+  color: var(--danger);
+}
+
+#pass-msg.average {
+  color: var(--pass-middle);
+}
+
+#pass-msg.average-good {
+  color: var(--pass-middle-good);
+}
+
+#pass-msg.good {
+  color: var(--pass-good);
+}
+
+#pass-msg.very-good {
+  color: var(--pass-very-good);
+}
+
+#pass-msg.excellent {
+  color: var(--pass-excellent);
 }
 
 /* result details */
