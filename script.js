@@ -347,7 +347,32 @@ function attachHandlers(){
     el('result-box').hidden = true;
   });
 }
-
+//Làm lại
+function restartQuiz() {
+    console.log('Restarting quiz...');
+    currentQuestionIndex = 0;
+    score = 0;
+    selectedOption = null;
+    selectedQuestions = [];
+    userAnswers = [];
+    clearInterval(timerId);
+    const scoreValueElement = document.getElementById('score-value');
+    if (scoreValueElement) {
+        scoreValueElement.textContent = `0/0`;
+        console.log('Score reset in restartQuiz to:', scoreValueElement.textContent);
+    }
+    const quizHeader = document.querySelector('.quiz-header');
+    if (quizHeader) quizHeader.style.display = 'none';
+    document.getElementById('quiz').style.display = 'none';
+    document.getElementById('result').style.display = 'none';
+    document.getElementById('start-screen').style.display = 'block';
+    const pastScores = document.getElementById('past-scores');
+    if (pastScores) pastScores.style.display = 'block';
+    const clearScoresBtn = document.getElementById('clear-scores-btn');
+    if (clearScoresBtn) clearScoresBtn.style.display = 'block';
+    updateNumQuestionsOptions();
+    displayPastScores();
+}
 // initialize
 window.addEventListener('load', async ()=>{
   attachHandlers();
