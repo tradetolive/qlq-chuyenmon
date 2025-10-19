@@ -1,4 +1,4 @@
-/* style.css - cải tiến giao diện với accordion cho chi tiết kết quả và nút kết quả bên phải */
+/* style.css - cải tiến giao diện với accordion cho chi tiết kết quả */
 :root {
   --bg: #f8fafc;
   --panel-bg: #ffffff;
@@ -166,6 +166,7 @@ body {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  align-items: right;
   margin-top: 12px;
 }
 
@@ -293,14 +294,6 @@ body {
 
 #pass-msg.excellent {
   color: var(--pass-excellent);
-}
-
-/* result buttons */
-.result-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 16px;
 }
 
 /* accordion for result details */
