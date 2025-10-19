@@ -33,7 +33,12 @@
           <button id="start-exam-btn" class="btn">Bắt đầu làm bài</button>
         </div>
 
-
+        <!-- Score history -->
+        <div id="score-history" class="score-history">
+          <h2>Lịch sử điểm số</h2>
+          <ul id="score-list"></ul>
+          <button id="clear-scores-btn" class="btn">Xóa lịch sử</button>
+        </div>
 
         <!-- Timer and controls when exam started -->
         <div id="exam-controls" class="exam-controls" hidden>
@@ -60,23 +65,17 @@
 
           <div id="explanation" class="explanation" aria-live="polite"></div>
 
+          <!-- Restart button in review mode -->
+          <div id="review-controls" class="review-controls" hidden>
+            <button id="restart-from-review-btn" class="btn">Làm lại từ đầu</button>
+          </div>
         </div>
-        <!-- Score history -->
-        <div id="score-history" class="score-history">
-          <h2>Lịch sử điểm số</h2>
-          <ul id="score-list"></ul>
-          <button id="clear-scores-btn" class="btn">Xóa lịch sử</button>
-        </div>
+
         <!-- Navigation -->
         <div class="nav-buttons">
           <button id="prev-btn" class="btn" disabled>Trước</button>
           <button id="next-btn" class="btn" disabled>Sau</button>
         </div>
-
-        <!-- Restart button in review mode -->
-          <div id="review-controls" class="review-controls" hidden>
-            <button id="restart-from-review-btn" class="btn">Làm lại từ đầu</button>
-          </div>
 
         <!-- Result box (shows after exam end) -->
         <div id="result-box" class="result-box" hidden>
@@ -84,7 +83,7 @@
           <p id="score-summary"></p>
           <p id="pass-msg"></p>
           <h3>Chi tiết đáp án</h3>
-          <div id="result-details"></div>
+          <div id="result-details" class="accordion"></div>
           <button id="restart-btn" class="btn">Làm lại từ đầu</button>
           <button id="review-btn" class="btn">Xem lại câu hỏi</button>
         </div>
