@@ -21,6 +21,13 @@
     <main class="main-grid">
       <!-- Left: question area -->
       <section class="panel panel-question">
+        <!-- Score history (di chuyển lên đầu để hiển thị trước setup, như phần phụ đầu tiên) -->
+        <div id="score-history" class="score-history">
+          <h2>Lịch sử điểm số</h2>
+          <ul id="score-list"></ul>
+          <button id="clear-scores-btn" class="btn">Xóa lịch sử</button>
+        </div>
+
         <!-- Exam settings / control -->
         <div id="exam-setup" class="exam-setup">
           <label>Số câu (1 - tổng): 
@@ -32,8 +39,6 @@
           <label><input id="randomize" type="checkbox" checked /> Chọn ngẫu nhiên</label>
           <button id="start-exam-btn" class="btn">Bắt đầu làm bài</button>
         </div>
-
-
 
         <!-- Timer and controls when exam started -->
         <div id="exam-controls" class="exam-controls" hidden>
@@ -59,26 +64,9 @@
           <div id="answers" class="answers" role="list"></div>
 
           <div id="explanation" class="explanation" aria-live="polite"></div>
-
-        </div>
-        <!-- Score history -->
-        <div id="score-history" class="score-history">
-          <h2>Lịch sử điểm số</h2>
-          <ul id="score-list"></ul>
-          <button id="clear-scores-btn" class="btn">Xóa lịch sử</button>
-        </div>
-        <!-- Navigation -->
-        <div class="nav-buttons">
-          <button id="prev-btn" class="btn" disabled>Trước</button>
-          <button id="next-btn" class="btn" disabled>Sau</button>
         </div>
 
-        <!-- Restart button in review mode -->
-          <div id="review-controls" class="review-controls" hidden>
-            <button id="restart-from-review-btn" class="btn">Làm lại từ đầu</button>
-          </div>
-
-        <!-- Result box (shows after exam end) -->
+        <!-- Result box (di chuyển lên đây, ngay sau question-wrapper để flow logic: câu hỏi -> kết quả nếu end) -->
         <div id="result-box" class="result-box" hidden>
           <h2>Kết quả</h2>
           <p id="score-summary"></p>
@@ -87,6 +75,17 @@
           <div id="result-details"></div>
           <button id="restart-btn" class="btn">Làm lại từ đầu</button>
           <button id="review-btn" class="btn">Xem lại câu hỏi</button>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-buttons">
+          <button id="prev-btn" class="btn" disabled>Trước</button>
+          <button id="next-btn" class="btn" disabled>Sau</button>
+        </div>
+
+        <!-- Restart button in review mode -->
+        <div id="review-controls" class="review-controls" hidden>
+          <button id="restart-from-review-btn" class="btn">Làm lại từ đầu</button>
         </div>
       </section>
 
