@@ -26,6 +26,7 @@ async function loadAllQuestions(){
     displayScoreHistory();
     // Ẩn question-wrapper ban đầu để tránh hiển thị rỗng
     el('question-wrapper').hidden = true;
+    el('score-history').hidden = true;
   }catch(err){
     console.error(err);
     el('question').textContent = 'Lỗi khi tải câu hỏi: ' + err.message;
@@ -417,9 +418,11 @@ function endExam(reason='manual'){
     resultDetails.appendChild(div);
   });
 
-  // Attach accordion toggle event listeners
+  // Attach accordion toggle event listeners and open all by default
   document.querySelectorAll('.accordion-header').forEach(header => {
     header.addEventListener('click', toggleAccordion);
+    // Open by default
+    toggleAccordion({currentTarget: header});
   });
 
   updateGridStatus();
@@ -438,7 +441,7 @@ function restartQuiz(){
   timeLeftSec = 0;
   stopTimer();
   el('exam-setup').hidden = false;
-  el('score-history').hidden = false;
+  el('score-history').hidden = true;
   el('exam-controls').hidden = true;
   el('review-controls').hidden = true;
   el('question-wrapper').hidden = true; // Ẩn question-wrapper để tránh rỗng và lộn xộn
@@ -478,6 +481,10 @@ function attachHandlers(){
     showQuestion(0);
   });
   el('clear-scores-btn').addEventListener('click', clearScoreHistory);
+  el('toggle-scores-btn').addEventListener('click', () => {
+    displayScoreHistory();
+    el('score-history').hidden = !el('score-history').hidden;
+  });
 }
 
 // initialize
