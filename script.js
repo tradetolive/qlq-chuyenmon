@@ -469,7 +469,6 @@ function attachHandlers(){
     if(!examStarted && !examEnded) return;
     if(currentIndex < examQuestions.length - 1) showQuestion(currentIndex + 1);
   });
-  el('restart-btn').addEventListener('click', restartQuiz);
   el('restart-from-review-btn').addEventListener('click', startExam);
   el('review-btn').addEventListener('click', ()=>{
     el('result-box').hidden = true;
