@@ -306,7 +306,9 @@ function displayScoreHistory(){
   }
   scores.forEach(score => {
     const li = document.createElement('li');
-    li.textContent = `${score.timestamp}: ${score.correctCount}/${score.total} (${score.pct.toFixed(2)}%) - ${score.evaluation}`;
+    // Sửa lỗi toFixed: kiểm tra pct có phải số không
+    const pctFixed = (typeof score.pct === 'number' && !isNaN(score.pct)) ? score.pct.toFixed(2) : '0.00';
+    li.textContent = `${score.timestamp}: ${score.correctCount}/${score.total} (${pctFixed}%) - ${score.evaluation}`;
     scoreList.appendChild(li);
   });
 }
@@ -355,11 +357,11 @@ function endExam(reason='manual'){
   const total = examQuestions.length;
   const pct = total ? Math.round((correctCount / total) * 10000) / 100 : 0;
 
-  // determine evaluation
+  // determine evaluation (sửa theo yêu cầu: 'Không đạt' thay vì 'Chưa đạt')
   let evaluation = '';
   let evaluationClass = '';
   if(pct < 50){
-    evaluation = 'Chưa đạt';
+    evaluation = 'Không đạt';
     evaluationClass = 'fail';
   } else if(pct <= 60){
     evaluation = 'Trung bình';
@@ -442,7 +444,7 @@ function restartQuiz(){
   el('start-exam-btn').disabled = false;
   el('prev-btn').disabled = true;
   el('next-btn').disabled = true;
-  el('result-box').hidden = false;
+  el('result-box').hidden = true;  // Sửa typo: ẩn result-box
   el('question').innerHTML = '';
   el('answers').innerHTML = '';
   hideExplanation();
