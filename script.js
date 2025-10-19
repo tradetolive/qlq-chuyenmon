@@ -24,6 +24,8 @@ async function loadAllQuestions(){
     if(parseInt(el('num-questions').value) > allQuestions.length) el('num-questions').value = Math.min(10, allQuestions.length);
     buildGridPlaceholder(allQuestions.length);
     displayScoreHistory();
+    // Ẩn question-wrapper ban đầu để tránh hiển thị rỗng
+    el('question-wrapper').hidden = true;
   }catch(err){
     console.error(err);
     el('question').textContent = 'Lỗi khi tải câu hỏi: ' + err.message;
@@ -87,6 +89,8 @@ function startExam(){
   el('prev-btn').disabled = false;
   el('next-btn').disabled = false;
   el('result-box').hidden = true;
+  el('result-details').innerHTML = ''; // Clear chi tiết kết quả để tránh lộn xộn nếu có bug hiển thị
+  el('question-wrapper').hidden = false; // Show khi bắt đầu
   renderQuestionGrid();
   showQuestion(0);
 
@@ -437,12 +441,13 @@ function restartQuiz(){
   el('score-history').hidden = false;
   el('exam-controls').hidden = true;
   el('review-controls').hidden = true;
-  el('question-wrapper').hidden = false;
+  el('question-wrapper').hidden = true; // Ẩn question-wrapper để tránh rỗng và lộn xộn
   el('nav-buttons').hidden = false;
   el('start-exam-btn').disabled = false;
   el('prev-btn').disabled = true;
   el('next-btn').disabled = true;
-  el('result-box').hidden = false;
+  el('result-box').hidden = true;
+  el('result-details').innerHTML = ''; // Clear chi tiết kết quả
   el('question').innerHTML = '';
   el('answers').innerHTML = '';
   hideExplanation();
