@@ -354,7 +354,7 @@ function endExam(reason='manual'){
     if(selected && selected === correct) correctCount++;
   }
   const total = examQuestions.length;
-  const pct = total ? Math.round((correctCount / total) * 10000) / 100 : 0;
+  const pct = total ? (correctCount / total * 100).toFixed(2) : 0;
 
   // determine evaluation
   let evaluation = '';
@@ -388,14 +388,14 @@ function endExam(reason='manual'){
   el('question-wrapper').hidden = true;
   el('nav-buttons').hidden = true;
   el('score-summary').textContent = `Bạn đúng ${correctCount}/${total} câu (${pct}%).`;
-  el('pass-msg').textContent = `Kết quả là ${evaluation}`;
+  el('pass-msg').textContent = `Kết quả: ${evaluation}`;
   el('pass-msg').className = evaluationClass;
 
   // show detailed results as accordion
   const resultDetails = el('result-details');
   resultDetails.innerHTML = '';
   examQuestions.forEach((q, idx) => {
-    const selected = userAnswers[q.id];
+    const selected = userAnswers[q.id] || '';
     const correct = q.correct || '';
     const isCorrect = selected && selected === correct;
     const div = document.createElement('div');
