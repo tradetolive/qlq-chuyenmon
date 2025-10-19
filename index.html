@@ -21,8 +21,11 @@
     <main class="main-grid">
       <!-- Left: question area -->
       <section class="panel panel-question">
+        <!-- Toggle button for score history -->
+        <button id="toggle-scores-btn" class="btn">Xem lịch sử điểm</button>
+
         <!-- Score history (di chuyển lên đầu để hiển thị trước setup, như phần phụ đầu tiên) -->
-        <div id="score-history" class="score-history">
+        <div id="score-history" class="score-history" hidden>
           <h2>Lịch sử điểm số</h2>
           <ul id="score-list"></ul>
           <button id="clear-scores-btn" class="btn">Xóa lịch sử</button>
