@@ -306,8 +306,7 @@ function displayScoreHistory(){
   }
   scores.forEach(score => {
     const li = document.createElement('li');
-    const pctStr = score.pct !== undefined ? score.pct.toFixed(2) : 'N/A';
-    li.textContent = `${score.timestamp}: ${score.correctCount}/${score.total} (${pctStr}%) - ${score.evaluation}`;
+    li.textContent = `${score.timestamp}: ${score.correctCount}/${score.total} (${score.pct.toFixed(2)}%) - ${score.evaluation}`;
     scoreList.appendChild(li);
   });
 }
@@ -354,19 +353,19 @@ function endExam(reason='manual'){
     if(selected && selected === correct) correctCount++;
   }
   const total = examQuestions.length;
-  const pct = total ? (correctCount / total * 100).toFixed(2) : 0;
+  const pct = total ? Math.round((correctCount / total) * 10000) / 100 : 0;
 
   // determine evaluation
   let evaluation = '';
   let evaluationClass = '';
   if(pct < 50){
-    evaluation = 'Không đạt';
+    evaluation = 'Chưa đạt';
     evaluationClass = 'fail';
   } else if(pct <= 60){
     evaluation = 'Trung bình';
     evaluationClass = 'average';
   } else if(pct <= 70){
-    evaluation = 'Trung bình Khá';
+    evaluation = 'Trung bình khá';
     evaluationClass = 'average-good';
   } else if(pct <= 80){
     evaluation = 'Khá';
@@ -388,14 +387,14 @@ function endExam(reason='manual'){
   el('question-wrapper').hidden = true;
   el('nav-buttons').hidden = true;
   el('score-summary').textContent = `Bạn đúng ${correctCount}/${total} câu (${pct}%).`;
-  el('pass-msg').textContent = `Kết quả: ${evaluation}`;
+  el('pass-msg').textContent = evaluation;
   el('pass-msg').className = evaluationClass;
 
   // show detailed results as accordion
   const resultDetails = el('result-details');
   resultDetails.innerHTML = '';
   examQuestions.forEach((q, idx) => {
-    const selected = userAnswers[q.id] || '';
+    const selected = userAnswers[q.id];
     const correct = q.correct || '';
     const isCorrect = selected && selected === correct;
     const div = document.createElement('div');
@@ -443,7 +442,7 @@ function restartQuiz(){
   el('start-exam-btn').disabled = false;
   el('prev-btn').disabled = true;
   el('next-btn').disabled = true;
-  el('result-box').hidden = true;
+  el('result-box').hidden = false;
   el('question').innerHTML = '';
   el('answers').innerHTML = '';
   hideExplanation();
@@ -466,7 +465,7 @@ function attachHandlers(){
     if(currentIndex < examQuestions.length - 1) showQuestion(currentIndex + 1);
   });
   el('restart-btn').addEventListener('click', restartQuiz);
-  el('restart-from-review-btn').addEventListener('click', restartQuiz);
+  el('restart-from-review-btn').addEventListener('click', startExam);
   el('review-btn').addEventListener('click', ()=>{
     el('result-box').hidden = true;
     el('exam-controls').hidden = true;
